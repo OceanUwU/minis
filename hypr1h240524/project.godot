@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="hypr1h240524"
+config/name="Recipe for Disaster"
 run/main_scene="res://node_2d.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://assets/bowlfront.png"
 
 [display]
 
