@@ -1,0 +1,293 @@
+[gd_scene load_steps=27 format=3 uid="uid://c2mftvwpaonw7"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_50efq"]
+[ext_resource type="PackedScene" uid="uid://espudj5mda3e" path="res://food.tscn" id="2_hwuka"]
+[ext_resource type="PackedScene" path="res://bowl.tscn" id="3_prl0g"]
+[ext_resource type="Texture2D" path="res://assets/recipie.png" id="4_b3uqe"]
+[ext_resource type="Texture2D" path="res://assets/bg.png" id="4_nchgs"]
+[ext_resource type="Script" path="res://Recipe.gd" id="5_it6qy"]
+[ext_resource type="Texture2D" path="res://assets/Milk.png" id="5_m6xbo"]
+[ext_resource type="Texture2D" path="res://assets/r1.png" id="6_r6n3w"]
+[ext_resource type="Texture2D" path="res://assets/sugar.png" id="6_v8wtb"]
+[ext_resource type="Texture2D" path="res://assets/Flour.png" id="7_xbv32"]
+[ext_resource type="Texture2D" path="res://assets/r2.png" id="7_ym7rw"]
+[ext_resource type="Texture2D" path="res://assets/r3.png" id="8_jhfjb"]
+[ext_resource type="Texture2D" path="res://assets/r4.png" id="9_n6e4j"]
+[ext_resource type="Texture2D" path="res://assets/you_win_cake.png" id="14_eqvvf"]
+[ext_resource type="Texture2D" path="res://assets/remote.png" id="15_f2nyb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jp6xp"]
+size = Vector2(6137, 154)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p06op"]
+size = Vector2(153, 689)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5e8j4"]
+size = Vector2(1235, 71)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cp7tj"]
+size = Vector2(62, 744)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_46577"]
+radius = 20.0
+height = 50.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3s3fc"]
+radius = 18.0
+height = 50.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u1eh3"]
+radius = 27.0
+height = 84.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2urkl"]
+size = Vector2(64, 77)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vthkv"]
+size = Vector2(95, 85)
+
+[sub_resource type="Animation" id="Animation_wfuv0"]
+resource_name = "new_animation"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cake:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.535887, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(2, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cake:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.233258, 1),
+"update": 0,
+"values": [-34.9066, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gxy4v"]
+_data = {
+"new_animation": SubResource("Animation_wfuv0")
+}
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_50efq")
+
+[node name="Background" type="TextureRect" parent="."]
+z_index = -100
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("4_nchgs")
+
+[node name="table" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="table"]
+position = Vector2(405.5, 605)
+shape = SubResource("RectangleShape2D_jp6xp")
+
+[node name="table2" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="table2"]
+position = Vector2(-99.5, 270.5)
+shape = SubResource("RectangleShape2D_p06op")
+
+[node name="table3" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="table3"]
+position = Vector2(554, -50)
+shape = SubResource("RectangleShape2D_5e8j4")
+
+[node name="table4" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="table4"]
+position = Vector2(1206, 239)
+shape = SubResource("RectangleShape2D_cp7tj")
+
+[node name="Bowl" parent="." instance=ExtResource("3_prl0g")]
+position = Vector2(551, 468)
+
+[node name="Recipe" type="Sprite2D" parent="Bowl"]
+position = Vector2(-431, -360)
+texture = ExtResource("4_b3uqe")
+script = ExtResource("5_it6qy")
+images = Array[Texture2D]([ExtResource("6_r6n3w"), ExtResource("7_ym7rw"), ExtResource("8_jhfjb"), ExtResource("9_n6e4j")])
+
+[node name="Egg" parent="." instance=ExtResource("2_hwuka")]
+position = Vector2(830, 470)
+
+[node name="CollisionShape2D" parent="Egg" index="1"]
+position = Vector2(0, -2)
+shape = SubResource("CapsuleShape2D_46577")
+
+[node name="Egg2" parent="." instance=ExtResource("2_hwuka")]
+position = Vector2(208, 485)
+
+[node name="CollisionShape2D" parent="Egg2" index="1"]
+shape = SubResource("CapsuleShape2D_3s3fc")
+
+[node name="Egg3" parent="." instance=ExtResource("2_hwuka")]
+position = Vector2(1057, 470)
+
+[node name="CollisionShape2D" parent="Egg3" index="1"]
+shape = SubResource("CapsuleShape2D_3s3fc")
+
+[node name="Egg4" parent="." instance=ExtResource("2_hwuka")]
+position = Vector2(883, 459)
+
+[node name="CollisionShape2D" parent="Egg4" index="1"]
+shape = SubResource("CapsuleShape2D_3s3fc")
+
+[node name="Egg5" parent="." instance=ExtResource("2_hwuka")]
+position = Vector2(844, 403)
+
+[node name="CollisionShape2D" parent="Egg5" index="1"]
+shape = SubResource("CapsuleShape2D_3s3fc")
+
+[node name="Egg6" parent="." instance=ExtResource("2_hwuka")]
+position = Vector2(222, 415)
+
+[node name="CollisionShape2D" parent="Egg6" index="1"]
+shape = SubResource("CapsuleShape2D_3s3fc")
+
+[node name="Egg7" parent="." instance=ExtResource("2_hwuka")]
+position = Vector2(334, 395)
+
+[node name="CollisionShape2D" parent="Egg7" index="1"]
+shape = SubResource("CapsuleShape2D_3s3fc")
+
+[node name="Egg8" parent="." instance=ExtResource("2_hwuka")]
+position = Vector2(935, 392)
+
+[node name="CollisionShape2D" parent="Egg8" index="1"]
+shape = SubResource("CapsuleShape2D_3s3fc")
+
+[node name="Egg9" parent="." instance=ExtResource("2_hwuka")]
+position = Vector2(161, 396)
+
+[node name="CollisionShape2D" parent="Egg9" index="1"]
+shape = SubResource("CapsuleShape2D_3s3fc")
+
+[node name="Milk" parent="." instance=ExtResource("2_hwuka")]
+position = Vector2(304, 473)
+gravity_scale_food = 0.33
+
+[node name="Sprite2D" parent="Milk" index="0"]
+scale = Vector2(0.745, 0.745)
+texture = ExtResource("5_m6xbo")
+
+[node name="CollisionShape2D" parent="Milk" index="1"]
+position = Vector2(-3, 0)
+shape = SubResource("CapsuleShape2D_u1eh3")
+
+[node name="Milk3" parent="." instance=ExtResource("2_hwuka")]
+position = Vector2(19, 461)
+gravity_scale_food = 0.33
+
+[node name="Sprite2D" parent="Milk3" index="0"]
+scale = Vector2(0.745, 0.745)
+texture = ExtResource("5_m6xbo")
+
+[node name="CollisionShape2D" parent="Milk3" index="1"]
+position = Vector2(-3, 0)
+shape = SubResource("CapsuleShape2D_u1eh3")
+
+[node name="Milk2" parent="." instance=ExtResource("2_hwuka")]
+position = Vector2(962, 463)
+gravity_scale_food = 0.33
+
+[node name="Sprite2D" parent="Milk2" index="0"]
+scale = Vector2(0.745, 0.745)
+texture = ExtResource("5_m6xbo")
+
+[node name="CollisionShape2D" parent="Milk2" index="1"]
+position = Vector2(-3, 0)
+shape = SubResource("CapsuleShape2D_u1eh3")
+
+[node name="Sugar" parent="." instance=ExtResource("2_hwuka")]
+position = Vector2(403, 465)
+gravity_scale_food = 0.4
+
+[node name="Sprite2D" parent="Sugar" index="0"]
+scale = Vector2(0.71, 0.71)
+texture = ExtResource("6_v8wtb")
+
+[node name="CollisionShape2D" parent="Sugar" index="1"]
+position = Vector2(-3, -0.5)
+shape = SubResource("RectangleShape2D_2urkl")
+
+[node name="Sugar2" parent="." instance=ExtResource("2_hwuka")]
+position = Vector2(1134, 457)
+gravity_scale_food = 0.4
+
+[node name="Sprite2D" parent="Sugar2" index="0"]
+scale = Vector2(0.71, 0.71)
+texture = ExtResource("6_v8wtb")
+
+[node name="CollisionShape2D" parent="Sugar2" index="1"]
+position = Vector2(-3, -0.5)
+shape = SubResource("RectangleShape2D_2urkl")
+
+[node name="Flour" parent="." instance=ExtResource("2_hwuka")]
+position = Vector2(107, 451)
+gravity_scale_food = 0.2
+
+[node name="Sprite2D" parent="Flour" index="0"]
+scale = Vector2(0.96, 0.96)
+texture = ExtResource("7_xbv32")
+
+[node name="CollisionShape2D" parent="Flour" index="1"]
+position = Vector2(-6.5, 13.5)
+shape = SubResource("RectangleShape2D_vthkv")
+
+[node name="Flour2" parent="." instance=ExtResource("2_hwuka")]
+position = Vector2(722, 454)
+gravity_scale_food = 0.2
+
+[node name="Sprite2D" parent="Flour2" index="0"]
+scale = Vector2(0.96, 0.96)
+texture = ExtResource("7_xbv32")
+
+[node name="CollisionShape2D" parent="Flour2" index="1"]
+position = Vector2(-6.5, 13.5)
+shape = SubResource("RectangleShape2D_vthkv")
+
+[node name="Cake" type="Sprite2D" parent="."]
+z_index = 10
+position = Vector2(549, 283)
+rotation = -34.9066
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("14_eqvvf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gxy4v")
+}
+
+[node name="Remote" type="Sprite2D" parent="."]
+position = Vector2(1046, 550)
+texture = ExtResource("15_f2nyb")
+
+[editable path="Egg"]
+[editable path="Egg2"]
+[editable path="Egg3"]
+[editable path="Egg4"]
+[editable path="Egg5"]
+[editable path="Egg6"]
+[editable path="Egg7"]
+[editable path="Egg8"]
+[editable path="Egg9"]
+[editable path="Milk"]
+[editable path="Milk3"]
+[editable path="Milk2"]
+[editable path="Sugar"]
+[editable path="Sugar2"]
+[editable path="Flour"]
+[editable path="Flour2"]

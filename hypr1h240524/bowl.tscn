@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://cghhsr5tm27lf"]
+
+[ext_resource type="Texture2D" uid="uid://b7wi6ryq5v00" path="res://assets/bowlback.png" id="1_2gdb8"]
+[ext_resource type="Script" path="res://bowl.gd" id="1_7asyp"]
+[ext_resource type="Texture2D" uid="uid://de43dxoft0muc" path="res://assets/bowlfront.png" id="2_x8iog"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0jmiv"]
+size = Vector2(27, 123)
+
+[node name="Bowl" type="Node2D"]
+script = ExtResource("1_7asyp")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture = ExtResource("1_2gdb8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+texture = ExtResource("2_x8iog")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-65.5, 8.5)
+rotation = -0.23911
+shape = SubResource("RectangleShape2D_0jmiv")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(73, 11)
+rotation = 0.23911
+shape = SubResource("RectangleShape2D_0jmiv")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(55, 16, -51, 16, -39, 71, 44, 70)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
