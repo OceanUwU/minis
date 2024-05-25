@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cm4v78jxew057"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_4r62p"]
+[ext_resource type="PackedScene" uid="uid://blqaxkshsqngy" path="res://shape.tscn" id="2_upd2o"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_4r62p")
+shape_scene = ExtResource("2_upd2o")
+
+[node name="Label" type="Label" parent="."]
+z_index = -5
+offset_left = 27.0
+offset_top = -4.0
+offset_right = 183.0
+offset_bottom = 151.0
+scale = Vector2(3.58, 3.58)
+text = "1"

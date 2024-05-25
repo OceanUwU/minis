@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://blqaxkshsqngy"]
+
+[ext_resource type="Script" path="res://Shape.gd" id="1_bhacq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0pps2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ijqo1"]
+
+[node name="Shape" type="Area2D"]
+script = ExtResource("1_bhacq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_0pps2")
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+shape = SubResource("RectangleShape2D_ijqo1")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="TouchScreenButton" to="." method="_on_touch_screen_button_pressed"]
