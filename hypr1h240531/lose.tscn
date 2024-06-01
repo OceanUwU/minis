@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwqe8cc0fe478"]
+
+[ext_resource type="PackedScene" uid="uid://bm1lhbs3fh0mo" path="res://win.tscn" id="1_t5mxp"]
+[ext_resource type="Texture2D" uid="uid://bu1ylwd3i6723" path="res://assets/Loose.png" id="2_p3mqy"]
+
+[node name="Win" instance=ExtResource("1_t5mxp")]
+
+[node name="TextureRect" parent="." index="0"]
+texture = ExtResource("2_p3mqy")

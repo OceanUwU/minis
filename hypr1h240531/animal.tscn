@@ -1,0 +1,76 @@
+[gd_scene load_steps=12 format=3 uid="uid://b4cmkf6d5s2db"]
+
+[ext_resource type="Texture2D" uid="uid://duxyhxwuufm5b" path="res://assets/Duck1.png" id="1_5lvgp"]
+[ext_resource type="Script" path="res://animal.gd" id="1_gkns0"]
+[ext_resource type="Texture2D" uid="uid://c2ph1xx0oithq" path="res://assets/dog1.png" id="2_b1mnv"]
+[ext_resource type="Texture2D" uid="uid://6cw87v1c2cbh" path="res://assets/Duck2.png" id="2_w348y"]
+[ext_resource type="Texture2D" uid="uid://bcrfj5j0d3uir" path="res://assets/dog2.png" id="3_7mjj6"]
+[ext_resource type="Texture2D" uid="uid://be24vff070y72" path="res://assets/Rat1.png" id="6_ttav7"]
+[ext_resource type="Texture2D" uid="uid://dxpo5bsfww77n" path="res://assets/Rat2.png" id="7_m30pb"]
+[ext_resource type="Texture2D" uid="uid://bpcr05jsmiou2" path="res://assets/Snail1.png" id="8_0xk4e"]
+[ext_resource type="Texture2D" uid="uid://bwh2ejcny6isf" path="res://assets/Snail2.png" id="9_2u6uu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nm6rc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_b1mnv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_7mjj6")
+}],
+"loop": true,
+"name": &"dog",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_5lvgp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_w348y")
+}],
+"loop": true,
+"name": &"duck",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_ttav7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_m30pb")
+}],
+"loop": true,
+"name": &"rat",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_0xk4e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_2u6uu")
+}],
+"loop": true,
+"name": &"snail",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_erx5o"]
+size = Vector2(84, 59)
+
+[node name="Animal" type="Area2D"]
+collision_layer = 255
+script = ExtResource("1_gkns0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_nm6rc")
+animation = &"rat"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_erx5o")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

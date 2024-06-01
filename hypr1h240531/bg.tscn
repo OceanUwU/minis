@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://dm1tsxc3a2bj3"]
+
+[ext_resource type="Texture2D" uid="uid://bv2mbcuyj1fsh" path="res://assets/Bush.png" id="1_yexp8"]
+[ext_resource type="Texture2D" uid="uid://bon8gyn56ltwo" path="res://assets/Grass1.png" id="2_qlgpe"]
+[ext_resource type="Texture2D" uid="uid://bsw26ymhtibeh" path="res://assets/Grass2.png" id="3_es0gs"]
+[ext_resource type="Texture2D" uid="uid://dl5ubmqmi1f3f" path="res://assets/Sign.png" id="4_migap"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_usg0n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_yexp8")
+}],
+"loop": true,
+"name": &"bush",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_qlgpe")
+}],
+"loop": true,
+"name": &"grass",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_es0gs")
+}],
+"loop": true,
+"name": &"grass2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_migap")
+}],
+"loop": true,
+"name": &"sign",
+"speed": 5.0
+}]
+
+[node name="BG" type="AnimatedSprite2D"]
+z_index = -1
+sprite_frames = SubResource("SpriteFrames_usg0n")
+animation = &"sign"

@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://cx7tscmqnl42x"]
+
+[ext_resource type="PackedScene" uid="uid://b4cmkf6d5s2db" path="res://animal.tscn" id="1_2x5vq"]
+[ext_resource type="Script" path="res://main.gd" id="1_7atwo"]
+[ext_resource type="PackedScene" uid="uid://dm1tsxc3a2bj3" path="res://bg.tscn" id="3_sltci"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_7atwo")
+animal_scene = ExtResource("1_2x5vq")
+bg_scene = ExtResource("3_sltci")
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -8
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 0.418535, 0.330631, 1)
+
+[node name="Duck" parent="." instance=ExtResource("1_2x5vq")]
+position = Vector2(-1729, -1200)
+
+[node name="AnimatedSprite2D" parent="Duck" index="0"]
+animation = &"duck"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[editable path="Duck"]

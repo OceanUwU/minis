@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://bm1lhbs3fh0mo"]
+
+[ext_resource type="Texture2D" uid="uid://o4xppht77gu0" path="res://assets/Win.png" id="1_jlbhb"]
+[ext_resource type="Script" path="res://win.gd" id="1_untfb"]
+
+[node name="Win" type="Node2D"]
+script = ExtResource("1_untfb")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("1_jlbhb")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 281.0
+offset_top = 498.0
+offset_right = 346.0
+offset_bottom = 529.0
+scale = Vector2(2.945, 2.945)
+text = "Again?"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
