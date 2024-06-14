@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7yukkvu14had"]
+
+[ext_resource type="Texture2D" uid="uid://cuv1y0jpju4mg" path="res://assets/fish.png" id="1_tehcb"]
+
+[sub_resource type="GDScript" id="GDScript_pxbmb"]
+script/source = "extends Node2D
+
+var lifetime: float = randf_range(0, 20)
+var speed: float = randf_range(40, 70)
+
+func _process(delta: float) -> void:
+    position.x += speed * delta
+    if position.x > 900:
+        position.x -= 1000
+    lifetime += delta
+    $Fish.position.y = sin(lifetime / 3.0) * 50
+    $Fish.rotation_degrees = sin(lifetime / 3.0) * 10
+"
+
+[node name="Fish" type="Node2D"]
+scale = Vector2(0.445, 0.445)
+script = SubResource("GDScript_pxbmb")
+
+[node name="Fish" type="Sprite2D" parent="."]
+texture = ExtResource("1_tehcb")
