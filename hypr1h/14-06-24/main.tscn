@@ -1,0 +1,231 @@
+[gd_scene load_steps=12 format=3 uid="uid://crsuij4m2bml4"]
+
+[ext_resource type="Texture2D" uid="uid://ymw0bgc5bql6" path="res://assets/water.png" id="1_06mip"]
+[ext_resource type="Texture2D" uid="uid://krlc0ptrvvui" path="res://assets/hook.png" id="2_7ik6n"]
+[ext_resource type="Texture2D" uid="uid://c76t4clyodnt5" path="res://assets/bin.png" id="3_oo6gj"]
+[ext_resource type="PackedScene" uid="uid://vt8xok6xfnc4" path="res://boot.tscn" id="4_xlgmv"]
+[ext_resource type="PackedScene" uid="uid://c7yukkvu14had" path="res://fish.tscn" id="5_n1xch"]
+
+[sub_resource type="GDScript" id="GDScript_hvoee"]
+script/source = "extends Node
+
+@export var boot_scene: PackedScene
+@export var boots: Node2D
+
+var time_to_spawn: float = 0.0
+var score: int = 0
+var spawned: int = 0
+var over: bool = false
+
+func _process(delta: float) -> void:
+    time_to_spawn -= delta
+    if time_to_spawn <= 0.0 && !over:
+        spawned += 1
+        time_to_spawn = 2.7 * pow(float(spawned), -0.25)
+        var boot = boot_scene.instantiate()
+        boot.die.connect(_on_boot_die)
+        boots.add_child(boot)
+        boot.global_position = Vector2(randf_range(50, 750), boots.global_position.y)
+    $Score.scale = $Score.scale.lerp(Vector2.ONE, 1 - 0.008 ** delta)
+
+func _on_hook_score():
+    if !over:
+        score += 1
+        $Score.text = str(score)
+        $Score.scale = Vector2.ONE * 1.5
+
+func _on_boot_die():
+    if !over:
+        $End.show()
+        over = true
+
+func _on_button_pressed():
+    for i in boots.get_children():
+        i.queue_free()
+    score = 0
+    $Score.text = str(score)
+    spawned = 0
+    time_to_spawn = 0
+    over = false
+    $End.hide()
+"
+
+[sub_resource type="GDScript" id="GDScript_8b5wd"]
+script/source = "extends Sprite2D
+
+func _process(delta):
+    position.x += 20 * delta
+    if position.x >= 1000:
+        position.x -= 2000
+"
+
+[sub_resource type="GDScript" id="GDScript_ioncg"]
+script/source = "extends Line2D
+
+func _process(delta):
+    points[0] = get_node(\"../Hook/Sprite/Connection\").global_position - position
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s3kes"]
+size = Vector2(142.373, 171.186)
+
+[sub_resource type="GDScript" id="GDScript_updtp"]
+script/source = "extends Area2D
+signal score
+
+
+var holding: Area2D
+var target: Vector2
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+    global_position = global_position.move_toward(target, 500 * delta)
+    if holding != null:
+        holding.global_position = global_position
+
+func _on_area_entered(area: Area2D):
+    if area.name == \"Bin\":
+        if holding != null:
+            deposit()
+    elif holding == null:
+        holding = area
+        holding.get_node(\"CollisionShape2D\").set_deferred(\"disabled\", true)
+        for area2 in get_overlapping_areas():
+            if area2.name == \"Bin\":
+                deposit()
+
+func deposit():
+    holding.queue_free()
+    score.emit()
+
+func _input(event):
+    if event is InputEventMouseMotion:
+        target = get_global_mouse_position()
+"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_41x16"]
+radius = 32.0
+height = 156.0
+
+[node name="Main" type="Node" node_paths=PackedStringArray("boots")]
+script = SubResource("GDScript_hvoee")
+boot_scene = ExtResource("4_xlgmv")
+boots = NodePath("Boots")
+
+[node name="TextureRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0745098, 1, 1, 1)
+
+[node name="TextureRect2" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 149.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.133333, 0.52549, 0.890196, 1)
+
+[node name="Water" type="Sprite2D" parent="."]
+position = Vector2(-1000, 121)
+texture = ExtResource("1_06mip")
+script = SubResource("GDScript_8b5wd")
+
+[node name="Water2" type="Sprite2D" parent="Water"]
+position = Vector2(2000, 0)
+texture = ExtResource("1_06mip")
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2(359, -9)
+points = PackedVector2Array(-132, 132, 0, 0)
+script = SubResource("GDScript_ioncg")
+
+[node name="Bin" type="Area2D" parent="."]
+position = Vector2(729, 62)
+scale = Vector2(0.59, 0.59)
+
+[node name="Sprite" type="Sprite2D" parent="Bin"]
+texture = ExtResource("3_oo6gj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bin"]
+position = Vector2(-8.47461, 4.23732)
+shape = SubResource("RectangleShape2D_s3kes")
+
+[node name="Fish" parent="." instance=ExtResource("5_n1xch")]
+modulate = Color(1, 0, 0.388235, 1)
+position = Vector2(78, 421)
+
+[node name="Fish3" parent="." instance=ExtResource("5_n1xch")]
+modulate = Color(0.972549, 0.92549, 0, 1)
+position = Vector2(563, 395)
+scale = Vector2(0.395, 0.395)
+
+[node name="Fish2" parent="." instance=ExtResource("5_n1xch")]
+modulate = Color(6.49765e-06, 0.744571, 3.85046e-07, 1)
+position = Vector2(258, 320)
+scale = Vector2(0.245, 0.245)
+
+[node name="Hook" type="Area2D" parent="."]
+position = Vector2(370, 290)
+script = SubResource("GDScript_updtp")
+
+[node name="Sprite" type="Sprite2D" parent="Hook"]
+position = Vector2(-1, -18)
+texture = ExtResource("2_7ik6n")
+
+[node name="Connection" type="Node2D" parent="Hook/Sprite"]
+position = Vector2(-13, -91)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hook"]
+position = Vector2(-22, -5)
+shape = SubResource("CapsuleShape2D_41x16")
+
+[node name="Boots" type="Node2D" parent="."]
+position = Vector2(405, 671)
+
+[node name="End" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="End"]
+layout_mode = 0
+offset_left = 102.0
+offset_top = 191.0
+offset_right = 824.0
+offset_bottom = 371.0
+theme_override_font_sizes/font_size = 101
+text = "Game over!"
+
+[node name="Button" type="Button" parent="End"]
+layout_mode = 0
+offset_left = 267.0
+offset_top = 328.0
+offset_right = 535.0
+offset_bottom = 427.0
+theme_override_font_sizes/font_size = 66
+text = "Restart?"
+
+[node name="Score" type="Label" parent="."]
+offset_left = 113.0
+offset_top = -9.0
+offset_right = 153.0
+offset_bottom = 61.0
+pivot_offset = Vector2(13.105, 38.97)
+theme_override_font_sizes/font_size = 51
+text = "0"
+
+[node name="ScoreHint" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 36
+text = "Score: "
+
+[connection signal="area_entered" from="Hook" to="Hook" method="_on_area_entered"]
+[connection signal="score" from="Hook" to="." method="_on_hook_score"]
+[connection signal="pressed" from="End/Button" to="." method="_on_button_pressed"]
