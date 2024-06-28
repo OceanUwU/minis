@@ -10,20 +10,20 @@ config_version=5
 
 [application]
 
-config/name="Tread Water"
+config/name="Worm yer way out"
 run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
-config/icon="res://assets/boot.png"
+config/icon="res://assets/apple.png"
 
 [display]
 
 window/size/viewport_width=800
-window/size/viewport_height=600
+window/size/viewport_height=450
 window/stretch/mode="canvas_items"
 
 [dotnet]
 
-project/assembly_name="140624"
+project/assembly_name="28-06-24"
 
 [rendering]
 

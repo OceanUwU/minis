@@ -1,0 +1,182 @@
+[gd_scene load_steps=5 format=3 uid="uid://drbf4cpbl27bu"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_wxqfs"]
+[ext_resource type="Script" path="res://Worm.gd" id="2_88ufd"]
+[ext_resource type="PackedScene" uid="uid://cqjnuwk3hvhhr" path="res://apple.tscn" id="3_dfwrp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xqmnu"]
+radius = 30.0
+
+[node name="Main" type="Node" node_paths=PackedStringArray("sky", "grass", "lava", "worm", "win", "loss", "timer")]
+script = ExtResource("1_wxqfs")
+sky = NodePath("Sky")
+grass = NodePath("Grass2")
+lava = NodePath("Lava")
+worm = NodePath("Worm")
+win = NodePath("Worm/Camera2D/Win")
+loss = NodePath("Worm/Camera2D/Loss")
+timer = NodePath("Worm/Camera2D/Timer")
+
+[node name="Sky" type="ColorRect" parent="."]
+show_behind_parent = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2154.0
+offset_top = -4716.0
+offset_right = 1278.0
+offset_bottom = -3990.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1.92523e-07, 0.743123, 0.968687, 1)
+
+[node name="Grass2" type="ColorRect" parent="."]
+show_behind_parent = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2162.0
+offset_top = -3687.0
+offset_right = 1270.0
+offset_bottom = -3889.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.219786, 0.582624, 1.92523e-07, 1)
+
+[node name="Lava" type="ColorRect" parent="."]
+show_behind_parent = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1953.0
+offset_top = 307.0
+offset_right = 1479.0
+offset_bottom = 1434.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.994449, 0.216934, 1.92523e-07, 1)
+
+[node name="Worm" type="Area2D" parent="."]
+script = ExtResource("2_88ufd")
+ring_colour = Color(0.999997, 0.485211, 0.605739, 1)
+background_colour = Color(0.215686, 0.12549, 0, 1)
+
+[node name="Camera2D" type="Camera2D" parent="Worm"]
+show_behind_parent = true
+
+[node name="Timer" type="Label" parent="Worm/Camera2D"]
+offset_left = -394.0
+offset_top = -220.0
+offset_right = -354.0
+offset_bottom = -197.0
+theme_override_font_sizes/font_size = 32
+
+[node name="Background" type="ColorRect" parent="Worm/Camera2D"]
+show_behind_parent = true
+z_index = -3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -507.0
+offset_top = -404.0
+offset_right = 524.0
+offset_bottom = 408.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.352125, 0.213931, 0, 1)
+
+[node name="Win" type="Control" parent="Worm/Camera2D"]
+visible = false
+z_index = 5
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Worm/Camera2D/Win"]
+layout_mode = 0
+offset_left = -169.0
+offset_top = -86.0
+offset_right = 463.0
+offset_bottom = -16.0
+theme_override_font_sizes/font_size = 51
+text = "erm you won!!"
+
+[node name="Label2" type="Label" parent="Worm/Camera2D/Win"]
+layout_mode = 0
+offset_left = -193.0
+offset_top = 18.0
+offset_right = 439.0
+offset_bottom = 88.0
+theme_override_font_sizes/font_size = 51
+text = "press r to restart"
+
+[node name="Loss" type="Control" parent="Worm/Camera2D"]
+visible = false
+z_index = 5
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Worm/Camera2D/Loss"]
+layout_mode = 0
+offset_left = -169.0
+offset_top = -86.0
+offset_right = 463.0
+offset_bottom = -16.0
+theme_override_font_sizes/font_size = 51
+text = "aw you got lavad"
+
+[node name="Label2" type="Label" parent="Worm/Camera2D/Loss"]
+layout_mode = 0
+offset_left = -193.0
+offset_top = 18.0
+offset_right = 439.0
+offset_bottom = 88.0
+theme_override_font_sizes/font_size = 51
+text = "press r to restart"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Worm"]
+shape = SubResource("CircleShape2D_xqmnu")
+
+[node name="Apple11" parent="." instance=ExtResource("3_dfwrp")]
+position = Vector2(68, -3219)
+
+[node name="Apple" parent="." instance=ExtResource("3_dfwrp")]
+position = Vector2(245, -248)
+
+[node name="Apple2" parent="." instance=ExtResource("3_dfwrp")]
+position = Vector2(-146, -756)
+
+[node name="Apple3" parent="." instance=ExtResource("3_dfwrp")]
+position = Vector2(330, -1181)
+
+[node name="Apple4" parent="." instance=ExtResource("3_dfwrp")]
+position = Vector2(-413, -1644)
+
+[node name="Apple5" parent="." instance=ExtResource("3_dfwrp")]
+position = Vector2(831, -2158)
+
+[node name="Apple6" parent="." instance=ExtResource("3_dfwrp")]
+position = Vector2(120, -2082)
+
+[node name="Apple7" parent="." instance=ExtResource("3_dfwrp")]
+position = Vector2(-553, -2336)
+
+[node name="Apple8" parent="." instance=ExtResource("3_dfwrp")]
+position = Vector2(748, -2755)
+
+[node name="Apple9" parent="." instance=ExtResource("3_dfwrp")]
+position = Vector2(-840, -3022)
+
+[node name="Apple10" parent="." instance=ExtResource("3_dfwrp")]
+position = Vector2(-27, -2933)
+
+[connection signal="area_entered" from="Worm" to="Worm" method="_on_area_entered"]
