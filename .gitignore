@@ -1,5 +1,6 @@
 .godot/
 export/
+!hypr1h/template/export/
 build/
 .directory
 *.keystore
