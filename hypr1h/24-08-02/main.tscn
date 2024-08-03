@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://mcf4pp3hu1jm"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_nogf6"]
+[ext_resource type="PackedScene" uid="uid://by50tqjw7j5ci" path="res://peg.tscn" id="2_e6thl"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_nogf6")
+peg_scene = ExtResource("2_e6thl")
+
+[node name="Button" type="Button" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -8.0
+offset_bottom = 8.0
+grow_horizontal = 0
+text = "Reset"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
