@@ -1,0 +1,110 @@
+[gd_scene load_steps=4 format=3 uid="uid://mcf4pp3hu1jm"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_nogf6"]
+[ext_resource type="Texture2D" uid="uid://7v0jar4aja07" path="res://assets/bg.png" id="2_wnohp"]
+[ext_resource type="PackedScene" uid="uid://blk5oa16hy2jp" path="res://card.tscn" id="3_bicdn"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_nogf6")
+card_scene = ExtResource("3_bicdn")
+
+[node name="Bg" type="Sprite2D" parent="."]
+texture = ExtResource("2_wnohp")
+centered = false
+
+[node name="CardSpawnPoint" type="Node2D" parent="."]
+position = Vector2(592, 262)
+
+[node name="PCards" type="Node2D" parent="."]
+position = Vector2(355, 645)
+
+[node name="DCards" type="Node2D" parent="."]
+position = Vector2(1017, 443)
+
+[node name="Bet" type="Label" parent="."]
+offset_left = 187.0
+offset_top = 333.0
+offset_right = 359.0
+offset_bottom = 381.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 26
+text = "Bet: Ð1,000,000"
+
+[node name="PScore" type="Label" parent="."]
+offset_left = 130.0
+offset_top = 579.0
+offset_right = 302.0
+offset_bottom = 627.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 76
+
+[node name="DScore" type="Label" parent="."]
+offset_left = 814.0
+offset_top = 414.0
+offset_right = 986.0
+offset_bottom = 519.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 76
+
+[node name="BetButton" type="Button" parent="."]
+visible = false
+offset_left = 28.0
+offset_top = 395.0
+offset_right = 226.0
+offset_bottom = 447.0
+theme_override_font_sizes/font_size = 31
+text = "Bet: ALL IN!!!"
+
+[node name="ActionButtons" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Hit" type="Button" parent="ActionButtons"]
+layout_mode = 0
+offset_left = 521.0
+offset_top = 381.0
+offset_right = 608.0
+offset_bottom = 453.0
+theme_override_font_sizes/font_size = 46
+text = "Hit!"
+
+[node name="Stand" type="Button" parent="ActionButtons"]
+layout_mode = 0
+offset_left = 654.0
+offset_top = 373.0
+offset_right = 790.0
+offset_bottom = 445.0
+theme_override_font_sizes/font_size = 46
+text = "Stand"
+
+[node name="GameOver" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="GameOver"]
+layout_mode = 0
+offset_left = 427.0
+offset_top = 513.0
+offset_right = 717.0
+offset_bottom = 583.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 51
+text = "Game Over!"
+
+[node name="Button" type="Button" parent="GameOver"]
+layout_mode = 0
+offset_left = 537.0
+offset_top = 603.0
+offset_right = 676.0
+offset_bottom = 681.0
+theme_override_font_sizes/font_size = 51
+text = "Retry"
+
+[connection signal="pressed" from="BetButton" to="." method="_on_bet_button_pressed"]
+[connection signal="pressed" from="ActionButtons/Hit" to="." method="_on_hit_pressed"]
+[connection signal="pressed" from="ActionButtons/Stand" to="." method="_on_stand_pressed"]
+[connection signal="pressed" from="GameOver/Button" to="." method="_on_button_pressed"]

@@ -1,0 +1,156 @@
+[gd_scene load_steps=20 format=3 uid="uid://blk5oa16hy2jp"]
+
+[ext_resource type="Script" path="res://Card.gd" id="1_x2cex"]
+[ext_resource type="Texture2D" uid="uid://cu4eibk8e3ts1" path="res://assets/cardbg.png" id="2_mwx2j"]
+[ext_resource type="Texture2D" uid="uid://cw3xm13gd0obu" path="res://assets/ducks.png" id="3_r2886"]
+[ext_resource type="Texture2D" uid="uid://du31jl6nd7dk2" path="res://assets/1.png" id="4_su673"]
+[ext_resource type="Texture2D" uid="uid://dffxhvu6uvepb" path="res://assets/10.png" id="5_lnglc"]
+[ext_resource type="Texture2D" uid="uid://d3lq7mglo7vvv" path="res://assets/j.png" id="6_j1kax"]
+[ext_resource type="Texture2D" uid="uid://dnhjd3x10rpd2" path="res://assets/q.png" id="7_jsr3i"]
+[ext_resource type="Texture2D" uid="uid://cng2flvcn1slb" path="res://assets/k.png" id="8_sj30e"]
+[ext_resource type="Texture2D" uid="uid://bgvicql28p3je" path="res://assets/2.png" id="9_kte00"]
+[ext_resource type="Texture2D" uid="uid://c12evckyysktc" path="res://assets/3.png" id="10_kefjy"]
+[ext_resource type="Texture2D" uid="uid://wj7ri04ta06i" path="res://assets/4.png" id="11_mix81"]
+[ext_resource type="Texture2D" uid="uid://cfipqi5igteom" path="res://assets/5.png" id="12_8nu0g"]
+[ext_resource type="Texture2D" uid="uid://dy40pgvbmalxf" path="res://assets/6.png" id="13_og38f"]
+[ext_resource type="Texture2D" uid="uid://bst1xwa8x6hea" path="res://assets/7.png" id="14_g41xl"]
+[ext_resource type="Texture2D" uid="uid://bndeme6olbs0r" path="res://assets/8.png" id="15_s0vbt"]
+[ext_resource type="Texture2D" uid="uid://ckrnncf4siaoy" path="res://assets/9.png" id="16_1gio0"]
+[ext_resource type="Texture2D" uid="uid://cj04oqbgr7jb3" path="res://assets/cardback.png" id="17_be54f"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fv7uf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_su673")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_lnglc")
+}],
+"loop": true,
+"name": &"10",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_j1kax")
+}],
+"loop": true,
+"name": &"11",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_jsr3i")
+}],
+"loop": true,
+"name": &"12",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_sj30e")
+}],
+"loop": true,
+"name": &"13",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_kte00")
+}],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_kefjy")
+}],
+"loop": true,
+"name": &"3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_mix81")
+}],
+"loop": true,
+"name": &"4",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_8nu0g")
+}],
+"loop": true,
+"name": &"5",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_og38f")
+}],
+"loop": true,
+"name": &"6",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_g41xl")
+}],
+"loop": true,
+"name": &"7",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_s0vbt")
+}],
+"loop": true,
+"name": &"8",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_1gio0")
+}],
+"loop": true,
+"name": &"9",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ie5i"]
+size = Vector2(160, 240)
+
+[node name="Card" type="Area2D"]
+script = ExtResource("1_x2cex")
+
+[node name="Back" type="Sprite2D" parent="."]
+self_modulate = Color(1, 0.641748, 0.58665, 1)
+texture = ExtResource("2_mwx2j")
+
+[node name="Ducks" type="Sprite2D" parent="Back"]
+texture = ExtResource("3_r2886")
+
+[node name="Face" type="AnimatedSprite2D" parent="Back"]
+sprite_frames = SubResource("SpriteFrames_fv7uf")
+animation = &"1"
+
+[node name="Back2" type="Sprite2D" parent="Back"]
+self_modulate = Color(0.20868, 1.51913e-07, 2.40654e-08, 1)
+show_behind_parent = true
+scale = Vector2(1.02, 1.02)
+texture = ExtResource("2_mwx2j")
+
+[node name="Cardback" type="Sprite2D" parent="Back"]
+texture = ExtResource("17_be54f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_0ie5i")
