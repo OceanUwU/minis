@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cme5oa8g3w5u"]
+
+[ext_resource type="Script" path="res://number_col.gd" id="1_uivbg"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4ni4s"]
+polygon = PackedVector2Array(0, -147, 0, 896, 46, 900, 45, -151)
+
+[node name="NumberCol" type="Node2D"]
+script = ExtResource("1_uivbg")
+
+[node name="Above" type="Node2D" parent="."]
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_4ni4s")

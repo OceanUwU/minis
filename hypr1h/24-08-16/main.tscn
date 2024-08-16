@@ -1,0 +1,146 @@
+[gd_scene load_steps=12 format=3 uid="uid://mcf4pp3hu1jm"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_nogf6"]
+[ext_resource type="Script" path="res://drill.gd" id="2_2m11v"]
+[ext_resource type="Texture2D" uid="uid://8yl1g2t05o23" path="res://assets/driller.png" id="2_64byj"]
+[ext_resource type="Texture2D" uid="uid://ba1sbs61fcfgi" path="res://assets/2d_lights_and_shadows_neutral_point_light(1).png" id="3_wqc0i"]
+[ext_resource type="PackedScene" uid="uid://cme5oa8g3w5u" path="res://number_col.tscn" id="5_3qeid"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hr0jx"]
+atlas = ExtResource("2_64byj")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dsuha"]
+atlas = ExtResource("2_64byj")
+region = Rect2(0, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ylno"]
+atlas = ExtResource("2_64byj")
+region = Rect2(0, 400, 200, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wjceg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hr0jx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dsuha")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ylno")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gjiso"]
+radius = 15.0333
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_actu3"]
+polygon = PackedVector2Array(-325, -141, -243, -147, -235, -100, -299, -95, -310, 6, -180, -3, -207, -101, -258, -100, -250, -147, -168, -156, -161, -44, 2, 0, -115, 83, -110, 139, -95, 153, -95, 173, -171, 187, -246, 190, -327, 184, -346, -6)
+
+[node name="Main" type="Node"]
+script = ExtResource("1_nogf6")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -76.0
+offset_top = -55.0
+offset_right = 83.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.125911, 0.125911, 0.125911, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -76.0
+offset_top = -55.0
+offset_right = 83.0
+offset_bottom = -670.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0295066, 0.0295066, 0.0295065, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+z_index = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -70.0
+offset_top = 681.0
+offset_right = 89.0
+offset_bottom = 66.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0295066, 0.0295066, 0.0295065, 1)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(640, 360)
+
+[node name="Drill" type="Area2D" parent="."]
+position = Vector2(382, 303)
+script = ExtResource("2_2m11v")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Drill"]
+position = Vector2(-191, -9)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_wjceg")
+frame_progress = 0.633444
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Drill"]
+position = Vector2(-14, 0)
+shape = SubResource("CircleShape2D_gjiso")
+
+[node name="PointLight2D" type="PointLight2D" parent="Drill"]
+position = Vector2(-77, -62)
+energy = 2.37
+shadow_enabled = true
+texture = ExtResource("3_wqc0i")
+texture_scale = 2.5
+
+[node name="PointLight2D2" type="PointLight2D" parent="Drill"]
+position = Vector2(-238, -94)
+shadow_enabled = true
+texture = ExtResource("3_wqc0i")
+texture_scale = 2.5
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Drill"]
+occluder = SubResource("OccluderPolygon2D_actu3")
+
+[node name="NumberCol" parent="." instance=ExtResource("5_3qeid")]
+position = Vector2(1380, 48)
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.154876, 0.154876, 0.154876, 1)
+theme_override_colors/font_outline_color = Color(0.573984, 0.459025, 1, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 32
+text = "Depth: "
+horizontal_alignment = 1
+
+[node name="End" type="Label" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.154876, 0.154876, 0.154876, 1)
+theme_override_colors/font_outline_color = Color(0.573984, 0.459025, 1, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 97
+text = "Game Over!
+Press R to restart"
+horizontal_alignment = 1
+vertical_alignment = 1
