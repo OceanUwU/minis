@@ -32,6 +32,7 @@ func deal():
     deal_card(true, true)
     await get_tree().create_timer(0.5).timeout
     deal_card(false, false)
+    $PScore.text = str(get_score(p_hand))
     await get_tree().create_timer(0.5).timeout
     deal_card(true, true)
     await get_tree().create_timer(0.5).timeout
@@ -39,7 +40,7 @@ func deal():
     await get_tree().create_timer(0.5).timeout
     $PScore.text = str(get_score(p_hand))
     $ActionButtons.show()
-    await get_tree().create_timer(1.0).timeout
+    await get_tree().create_timer(0.5).timeout
     $DScore.text = str(get_max_score(d_hand[1]))
     
 func get_min_score(value: int):
@@ -73,8 +74,9 @@ func deal_card(player: bool, flip: bool):
     card.target_pos = node.global_position + Vector2(45, 0) * len(hand)
     hand.append(card.value)
     node.add_child(card)
-    card.global_position = $CardSpawnPoint.global_position
-    await get_tree().create_timer(1.0).timeout
+    card.global_position = $Deck.global_position
+    card.scale = $Deck.scale
+    await get_tree().create_timer(0.5).timeout
     if flip:
         card.flip()
 
@@ -85,6 +87,7 @@ func get_card() -> Node2D:
         deck.shuffle()
     var card = card_scene.instantiate()
     card.value = deck.pop_front()
+    $Deck/Count.text = str(len(deck))
     return card
 
 func _on_hit_pressed():

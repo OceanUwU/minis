@@ -5,7 +5,6 @@ var target_pos: Vector2
 
 func _ready():
     $Back/Face.animation = str(value)
-    scale = Vector2.ZERO
 
 func _process(delta):
     global_position = global_position.lerp(target_pos, 1 - pow(0.01, delta))

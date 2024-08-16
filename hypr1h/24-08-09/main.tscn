@@ -12,8 +12,20 @@ card_scene = ExtResource("3_bicdn")
 texture = ExtResource("2_wnohp")
 centered = false
 
-[node name="CardSpawnPoint" type="Node2D" parent="."]
-position = Vector2(592, 262)
+[node name="Deck" parent="." instance=ExtResource("3_bicdn")]
+position = Vector2(693, 256)
+scale = Vector2(0.485, 0.485)
+script = null
+
+[node name="Count" type="Label" parent="Deck"]
+offset_left = -80.4123
+offset_top = -164.948
+offset_right = 82.5877
+offset_bottom = -120.948
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 31
+text = "20"
+horizontal_alignment = 1
 
 [node name="PCards" type="Node2D" parent="."]
 position = Vector2(355, 645)
