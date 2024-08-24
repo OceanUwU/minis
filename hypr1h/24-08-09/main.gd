@@ -4,11 +4,15 @@ const SCORE_MAX := 21
 const DEALER_STAND := 17
 
 @export var card_scene: PackedScene
+var chips := 0
 var bet := 1
+var best := 1
 var deck := []
 var discard := []
 var p_hand := []
 var d_hand := []
+@onready var chip_pos: Vector2 = $Chips.position
+@export var chip_nodes: Array[Node]
 
 func _ready():
     randomize()
@@ -17,6 +21,9 @@ func _ready():
             deck.append(i+1)
     deck.shuffle()
     deal()
+    for i in bet:
+        make_chip_fall()
+        await get_tree().create_timer(0.05).timeout
 
 func deal():
     for node in $PCards.get_children():
@@ -67,6 +74,29 @@ func get_score(hand: Array) -> int:
             return i
     return possible_scores[len(possible_scores) - 1]
 
+func make_chip_fall() -> bool:
+    chips += 1
+    if chips > 256:
+        return false
+    var chipSlot = chip_nodes[(chips - 1) / 32]
+    var chip = $Chips/Chip.duplicate()
+    chip.show()
+    chip.position = chipSlot.position - $Chips.position
+    chip.position.y -= 394
+    $Chips.add_child(chip)
+    var fall_pos = chip.position.y + 394 -13 * ((chips - 1) % 32)
+    var tween := get_tree().create_tween()
+    tween.set_ease(Tween.EASE_IN)
+    tween.set_trans(Tween.TRANS_QUAD)
+    tween.tween_property(chip, "position:y", fall_pos, 0.8)
+    tween.tween_callback(func(): $Chips/Drop.play())
+    tween.set_ease(Tween.EASE_OUT)
+    tween.tween_property(chip, "position:y", fall_pos - 30, 0.2)
+    tween.set_ease(Tween.EASE_IN)
+    tween.tween_property(chip, "position:y", fall_pos, 0.2)
+    tween.tween_callback(func(): $Chips/Drop2.play())
+    return true
+
 func deal_card(player: bool, flip: bool):
     var node = ($PCards if player else $DCards)
     var hand = (p_hand if player else d_hand)
@@ -106,6 +136,15 @@ func lose():
     $GameOver.show()
 
 func win():
+    for i in bet:
+        if not make_chip_fall():
+            break
+        await get_tree().create_timer(0.05).timeout
+    bet *= 2
+    $Bet.text = "Bet: Ð" + str(bet) + ",000,000"
+    if best < bet:
+        best = bet
+        $Best.text = "Best: Ð" + str(best) + ",000,000"
     $BetButton.show()
 
 func _on_stand_pressed():
@@ -127,8 +166,6 @@ func _on_stand_pressed():
         win()
 
 func _on_bet_button_pressed():
-    bet *= 2
-    $Bet.text = "Bet: Ð" + str(bet) + ",000,000"
     $BetButton.hide()
     deal()
 
@@ -137,3 +174,18 @@ func _on_button_pressed():
     $Bet.text = "Bet: Ð" + str(bet) + ",000,000"
     $GameOver.hide()
     deal()
+    var tween := get_tree().create_tween()
+    tween.set_parallel()
+    tween.tween_property($Chips, "position", $ChipGoPlace.position, 0.6)
+    tween.tween_property($Chips, "scale", Vector2.ZERO, 0.6)
+    await tween.finished
+    chips = 0
+    var n = 0
+    for i in $Chips.get_children():
+        n += 1
+        if n > 3:
+            i.free()
+            
+    make_chip_fall()
+    $Chips.position = chip_pos
+    $Chips.scale = Vector2.ONE

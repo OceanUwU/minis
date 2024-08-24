@@ -5,6 +5,7 @@ var target_pos: Vector2
 
 func _ready():
     $Back/Face.animation = str(value)
+    get_node("Deal" + str(randi_range(1, 4))).play()
 
 func _process(delta):
     global_position = global_position.lerp(target_pos, 1 - pow(0.01, delta))
@@ -17,6 +18,7 @@ func del():
     queue_free()
 
 func flip():
+    $Flip.play()
     var tween := get_tree().create_tween()
     tween.tween_property(self, "scale:x", 0, 0.15)
     await tween.finished
@@ -24,4 +26,3 @@ func flip():
     tween = get_tree().create_tween()
     tween.tween_property(self, "scale:x", 1.0, 0.15)
     await tween.finished
-

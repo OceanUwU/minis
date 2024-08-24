@@ -21,7 +21,7 @@ func _physics_process(delta: float) -> void:
     position += dir * 5
     position.x += X_SPEED * delta
     position.x = min(position.x, 1260)
-    position.y = clamp(position.y, 50, 680)
+    position.y = clamp(position.y, 50, 670)
     if position.x < 0:
         get_parent().end()
         queue_free()
