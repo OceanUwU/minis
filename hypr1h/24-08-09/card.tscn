@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://blk5oa16hy2jp"]
+[gd_scene load_steps=25 format=3 uid="uid://blk5oa16hy2jp"]
 
 [ext_resource type="Script" path="res://Card.gd" id="1_x2cex"]
 [ext_resource type="Texture2D" uid="uid://cu4eibk8e3ts1" path="res://assets/cardbg.png" id="2_mwx2j"]
@@ -17,6 +17,11 @@
 [ext_resource type="Texture2D" uid="uid://bndeme6olbs0r" path="res://assets/8.png" id="15_s0vbt"]
 [ext_resource type="Texture2D" uid="uid://ckrnncf4siaoy" path="res://assets/9.png" id="16_1gio0"]
 [ext_resource type="Texture2D" uid="uid://cj04oqbgr7jb3" path="res://assets/cardback.png" id="17_be54f"]
+[ext_resource type="AudioStream" uid="uid://crv7gxw7ggxbo" path="res://assets/cardShove1.ogg" id="18_kr4ja"]
+[ext_resource type="AudioStream" uid="uid://brhryl5e6iv42" path="res://assets/cardShove2.ogg" id="19_ftvuc"]
+[ext_resource type="AudioStream" uid="uid://bmv05p2lgevha" path="res://assets/cardShove3.ogg" id="20_ki435"]
+[ext_resource type="AudioStream" uid="uid://b7l4vdy21ftl2" path="res://assets/cardShove4.ogg" id="21_8xfpm"]
+[ext_resource type="AudioStream" uid="uid://dwrh0i6hv3u8u" path="res://assets/cardPlace1.ogg" id="22_eqqyu"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fv7uf"]
 animations = [{
@@ -154,3 +159,18 @@ texture = ExtResource("17_be54f")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource("RectangleShape2D_0ie5i")
+
+[node name="Deal1" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("18_kr4ja")
+
+[node name="Deal2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("19_ftvuc")
+
+[node name="Deal3" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("20_ki435")
+
+[node name="Deal4" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("21_8xfpm")
+
+[node name="Flip" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("22_eqqyu")
