@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="24-08-16"
+config/name="Digit Depths"
 config/version="1.0.0"
 run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
