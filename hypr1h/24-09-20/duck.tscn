@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://bdov55l7vwsvf"]
+
+[ext_resource type="Texture2D" uid="uid://dreyevqf78nyl" path="res://assets/Duck1.png" id="1_tikaf"]
+[ext_resource type="Texture2D" uid="uid://cj1dyk78nd25d" path="res://assets/Duck2.png" id="2_gtpg4"]
+[ext_resource type="Script" path="res://duck.gd" id="3_ga04e"]
+[ext_resource type="Texture2D" uid="uid://6xyhntmuod7t" path="res://assets/heart.png" id="4_0k8so"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kxe0c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_tikaf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_gtpg4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qqftj"]
+radius = 41.0122
+
+[node name="Duck" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_kxe0c")
+frame = 1
+frame_progress = 0.631581
+script = ExtResource("3_ga04e")
+
+[node name="Heart" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("4_0k8so")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_qqftj")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
