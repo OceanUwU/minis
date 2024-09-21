@@ -1,0 +1,97 @@
+[gd_scene load_steps=7 format=3 uid="uid://mcf4pp3hu1jm"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_nogf6"]
+[ext_resource type="Texture2D" uid="uid://6xyhntmuod7t" path="res://assets/heart.png" id="2_1haxp"]
+[ext_resource type="Texture2D" uid="uid://cgd2871rlbxbp" path="res://assets/catap1.png" id="3_l5sj2"]
+[ext_resource type="Texture2D" uid="uid://cpwhdwnjy8owa" path="res://assets/catap.png" id="4_6sea7"]
+[ext_resource type="PackedScene" uid="uid://brfhqdrig05ny" path="res://heart.tscn" id="5_f41wd"]
+[ext_resource type="PackedScene" uid="uid://bdov55l7vwsvf" path="res://duck.tscn" id="6_q1d35"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_nogf6")
+hrt_scene = ExtResource("5_f41wd")
+duck_scene = ExtResource("6_q1d35")
+
+[node name="Reserve" type="Sprite2D" parent="."]
+position = Vector2(79, 68)
+texture = ExtResource("2_1haxp")
+
+[node name="Num" type="Label" parent="."]
+offset_left = 150.0
+offset_top = 31.0
+offset_right = 190.0
+offset_bottom = 108.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 56
+text = "0"
+
+[node name="Timer" type="Label" parent="."]
+z_index = 100
+offset_left = 168.0
+offset_top = 3.0
+offset_right = 1276.0
+offset_bottom = 80.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 36
+text = "0.00"
+horizontal_alignment = 2
+
+[node name="Catap" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(197, 398)
+texture = ExtResource("3_l5sj2")
+
+[node name="Back" type="Sprite2D" parent="Catap"]
+z_index = -1
+z_as_relative = false
+texture = ExtResource("4_6sea7")
+
+[node name="Line2D" type="Line2D" parent="Catap"]
+z_index = -1
+z_as_relative = false
+points = PackedVector2Array(-28, -94, 55, -67)
+default_color = Color(1, 0.312295, 0.248026, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line2D2" type="Line2D" parent="Catap"]
+z_index = -1
+z_as_relative = false
+points = PackedVector2Array(-28, -94, -64, -63)
+default_color = Color(1, 0.312295, 0.248026, 1)
+begin_cap_mode = 2
+
+[node name="HeartPos" type="Node2D" parent="Catap"]
+position = Vector2(-4, -71)
+
+[node name="HeartDefaultPos" type="Node2D" parent="Catap"]
+position = Vector2(-4, -71)
+
+[node name="Button" type="Button" parent="."]
+z_index = 100
+offset_left = 8.0
+offset_top = 678.0
+offset_right = 70.0
+offset_bottom = 716.0
+theme_override_font_sizes/font_size = 21
+text = "Retry"
+
+[node name="Label" type="Label" parent="."]
+visible = false
+z_index = 100
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -113.0
+offset_top = -25.0
+offset_right = 113.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 36
+text = "GAME OVER!!"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
