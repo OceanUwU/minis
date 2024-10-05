@@ -1,0 +1,137 @@
+[gd_scene load_steps=16 format=3 uid="uid://p7blllx2j81e"]
+
+[ext_resource type="Script" path="res://character.gd" id="1_x5hss"]
+[ext_resource type="Texture2D" uid="uid://bq4odfq2p7020" path="res://assets/dog2.png" id="1_x05u2"]
+[ext_resource type="Texture2D" uid="uid://cpswy3jc651wt" path="res://assets/balloon.png" id="2_34cp4"]
+[ext_resource type="Texture2D" uid="uid://coc3kjpfnb53c" path="res://assets/dog1.png" id="2_ieujh"]
+[ext_resource type="Texture2D" uid="uid://du2a0we4ein53" path="res://assets/Duck2.png" id="3_xo415"]
+[ext_resource type="Texture2D" uid="uid://dvfcyve15amab" path="res://assets/popper.png" id="3_ykbc2"]
+[ext_resource type="Texture2D" uid="uid://ddbbyllh7ygw" path="res://assets/Duck1.png" id="4_2alvc"]
+[ext_resource type="Texture2D" uid="uid://cxenkbs7vsgnm" path="res://assets/tooter.png" id="4_hrf2i"]
+[ext_resource type="Texture2D" uid="uid://dmila0dy5mdnm" path="res://assets/Rat2.png" id="5_huxjh"]
+[ext_resource type="Texture2D" uid="uid://bufxc0he803qv" path="res://assets/Rat1.png" id="6_gxbls"]
+[ext_resource type="Texture2D" uid="uid://co6v87cwgf2ko" path="res://assets/Snail2.png" id="7_wqppb"]
+[ext_resource type="Texture2D" uid="uid://bbxisulbltynq" path="res://assets/Snail1.png" id="8_ln4mr"]
+[ext_resource type="Texture2D" uid="uid://dki5wn27vqgnw" path="res://assets/speech.png" id="10_60sgd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_td814"]
+size = Vector2(136, 80)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x56qv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_x05u2")
+}],
+"loop": true,
+"name": &"dog",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_x05u2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ieujh")
+}],
+"loop": true,
+"name": &"dogw",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_xo415")
+}],
+"loop": true,
+"name": &"duck",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_2alvc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_xo415")
+}],
+"loop": true,
+"name": &"duckw",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_huxjh")
+}],
+"loop": true,
+"name": &"rat",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_gxbls")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_huxjh")
+}],
+"loop": true,
+"name": &"ratw",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_wqppb")
+}],
+"loop": true,
+"name": &"snail",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_wqppb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ln4mr")
+}],
+"loop": true,
+"name": &"snailw",
+"speed": 5.0
+}]
+
+[node name="Character" type="Area2D"]
+position = Vector2(-80, 0)
+script = ExtResource("1_x5hss")
+items = Array[Texture2D]([ExtResource("2_34cp4"), ExtResource("3_ykbc2"), ExtResource("4_hrf2i")])
+speed = 150.0
+wait_time = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-4, -2)
+shape = SubResource("RectangleShape2D_td814")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(-1, 1)
+sprite_frames = SubResource("SpriteFrames_x56qv")
+animation = &"duckw"
+
+[node name="Hold" type="Sprite2D" parent="Sprite"]
+visible = false
+position = Vector2(-22, 18)
+
+[node name="Speech" type="Sprite2D" parent="."]
+position = Vector2(69, -60)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("10_60sgd")
+
+[node name="Wants" type="Sprite2D" parent="Speech"]
+position = Vector2(12, -24)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_34cp4")
+
+[node name="ProgressBar" type="ProgressBar" parent="Speech"]
+offset_left = 140.0
+offset_top = 80.0
+offset_right = 348.0
+offset_bottom = 107.0
+rotation = -1.5708
+theme_override_font_sizes/font_size = 1
+max_value = 1.0
+show_percentage = false
