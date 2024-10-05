@@ -1,0 +1,65 @@
+[gd_scene load_steps=5 format=3 uid="uid://mcf4pp3hu1jm"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_nogf6"]
+[ext_resource type="Script" path="res://conveyor.gd" id="2_k0vr7"]
+[ext_resource type="PackedScene" uid="uid://p7blllx2j81e" path="res://character.tscn" id="2_rajmf"]
+[ext_resource type="PackedScene" uid="uid://1p1d538d4fqj" path="res://item.tscn" id="3_3pyyr"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_nogf6")
+char_scene = ExtResource("2_rajmf")
+spawn_delay = 2.0
+
+[node name="Conveyor" type="Node2D" parent="."]
+position = Vector2(1100, 0)
+script = ExtResource("2_k0vr7")
+item_scene = ExtResource("3_3pyyr")
+width = 90.0
+outline = Color(0.307562, 2.1358e-07, 7.21961e-08, 1)
+bg = Color(1, 0.682119, 0.631921, 1)
+speed = 135.0
+segment_size = 120.0
+segments_per_item = 1
+
+[node name="Score" type="Label" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 105.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 76
+text = "0"
+horizontal_alignment = 1
+
+[node name="Over" type="Control" parent="."]
+visible = false
+z_index = 100
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Score" type="Label" parent="Over"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 76
+text = "Party's over..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Over"]
+layout_mode = 0
+offset_left = 542.0
+offset_top = 423.0
+offset_right = 727.0
+offset_bottom = 508.0
+theme_override_font_sizes/font_size = 56
+text = "Again?"
+
+[connection signal="pressed" from="Over/Button" to="." method="_on_button_pressed"]
