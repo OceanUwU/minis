@@ -1,0 +1,91 @@
+[gd_scene load_steps=8 format=3 uid="uid://mcf4pp3hu1jm"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_nogf6"]
+[ext_resource type="Texture2D" uid="uid://y1m32dqka1x2" path="res://assets/dino1.png" id="2_w8g54"]
+[ext_resource type="Texture2D" uid="uid://b8e6dq7xse4hj" path="res://assets/dino2.png" id="3_gph56"]
+[ext_resource type="Script" path="res://dino.gd" id="4_kn3ef"]
+[ext_resource type="PackedScene" uid="uid://dfajiebw6uj41" path="res://bird.tscn" id="5_3mij8"]
+[ext_resource type="Script" path="res://stars.gd" id="6_0y0vj"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ngf4p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_w8g54")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_gph56")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[node name="Main" type="Node" node_paths=PackedStringArray("eat_spot")]
+script = ExtResource("1_nogf6")
+bird_scene = ExtResource("5_3mij8")
+eat_spot = NodePath("Dino/EatSpot")
+
+[node name="Dino" type="AnimatedSprite2D" parent="."]
+z_index = 1
+position = Vector2(201, 420)
+sprite_frames = SubResource("SpriteFrames_ngf4p")
+frame_progress = 0.462429
+script = ExtResource("4_kn3ef")
+osc_amount = 30.0
+osc_speed = 2.0
+bounce_amount = 10.0
+bounce_speed = 5.0
+
+[node name="ColorRect" type="ColorRect" parent="Dino"]
+z_index = -7
+offset_left = 26.0
+offset_top = -130.0
+offset_right = 1195.0
+offset_bottom = -14.0
+mouse_filter = 2
+color = Color(1, 0.627987, 0.571351, 1)
+
+[node name="EatSpot" type="Node2D" parent="Dino"]
+position = Vector2(76, -74)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
+offset_left = -41.0
+offset_top = 586.0
+offset_right = 1313.0
+offset_bottom = 761.0
+mouse_filter = 2
+color = Color(0.378124, 0.000308377, 0.000169156, 1)
+
+[node name="Stars" type="Node2D" parent="."]
+z_index = -10
+script = ExtResource("6_0y0vj")
+
+[node name="GameOver" type="Label" parent="."]
+offset_left = 415.0
+offset_top = 88.0
+offset_right = 898.0
+offset_bottom = 226.0
+theme_override_font_sizes/font_size = 101
+text = "Nommed!"
+
+[node name="Retry" type="Button" parent="GameOver"]
+layout_mode = 0
+offset_left = 143.0
+offset_top = 132.0
+offset_right = 305.0
+offset_bottom = 210.0
+theme_override_font_sizes/font_size = 51
+text = "Retry?"
+
+[node name="Timer" type="Label" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 70.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 51
+text = "0.0s"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="GameOver/Retry" to="." method="_on_retry_pressed"]
