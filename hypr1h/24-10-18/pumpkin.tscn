@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cly5fb72gtcy"]
+
+[ext_resource type="Script" path="res://pumpkin.gd" id="1_fjbku"]
+[ext_resource type="Texture2D" uid="uid://ci8wg7htyfg63" path="res://assets/pumpkin.png" id="2_kjsee"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7k3b6"]
+size = Vector2(67, 49)
+
+[node name="Pumpkin" type="Area2D"]
+script = ExtResource("1_fjbku")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_kjsee")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-6.5, 8.5)
+shape = SubResource("RectangleShape2D_7k3b6")
