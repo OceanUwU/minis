@@ -1,0 +1,114 @@
+[gd_scene load_steps=8 format=3 uid="uid://mcf4pp3hu1jm"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_nogf6"]
+[ext_resource type="PackedScene" uid="uid://cjcc0jq3lh7xu" path="res://club.tscn" id="2_7plel"]
+[ext_resource type="PackedScene" uid="uid://dpykt8es10usk" path="res://ball.tscn" id="3_uayct"]
+[ext_resource type="Texture2D" uid="uid://b58o8jt1xxoly" path="res://assets/netfront.png" id="4_r127k"]
+[ext_resource type="Texture2D" uid="uid://bxa1gfgyae6vi" path="res://assets/netback.png" id="5_615qu"]
+[ext_resource type="Script" path="res://stars.gd" id="6_1ibqa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tocnc"]
+size = Vector2(112, 59)
+
+[node name="Main" type="Node"]
+script = ExtResource("1_nogf6")
+ball_scene = ExtResource("3_uayct")
+ball_interval = 2.5
+
+[node name="Club" parent="." instance=ExtResource("2_7plel")]
+position = Vector2(1179, 294)
+move_speed = 500.0
+
+[node name="Net" type="Area2D" parent="."]
+position = Vector2(298, 652)
+scale = Vector2(1.5, 1.5)
+
+[node name="Sprite2D" type="Sprite2D" parent="Net"]
+z_index = 1
+texture = ExtResource("4_r127k")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Net/Sprite2D"]
+z_index = -4
+texture = ExtResource("5_615qu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Net"]
+position = Vector2(-0.666672, -50.5)
+shape = SubResource("RectangleShape2D_tocnc")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Net"]
+position = Vector2(2.66667, -110.667)
+emitting = false
+amount = 32
+lifetime = 3.0
+one_shot = true
+explosiveness = 1.0
+direction = Vector2(0, -1)
+spread = 30.0
+initial_velocity_min = 3.8
+initial_velocity_max = 627.33
+scale_amount_max = 5.0
+color = Color(0.966667, 1, 0, 1)
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -100
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Stars" type="Node2D" parent="."]
+z_index = -100
+script = ExtResource("6_1ibqa")
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+z_index = -99
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 632.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.172549, 0, 1)
+
+[node name="Score" type="Label" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 76
+text = "0"
+horizontal_alignment = 1
+
+[node name="GameOver" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Score" type="Label" parent="GameOver"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 162.0
+offset_bottom = 267.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 76
+text = "Game over!"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="GameOver"]
+layout_mode = 0
+offset_left = 558.0
+offset_top = 259.0
+offset_right = 736.0
+offset_bottom = 344.0
+theme_override_font_sizes/font_size = 56
+text = "Retry?"
+
+[connection signal="pressed" from="GameOver/Button" to="." method="_on_button_pressed"]
