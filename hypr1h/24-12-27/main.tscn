@@ -1,0 +1,80 @@
+[gd_scene load_steps=9 format=3 uid="uid://mcf4pp3hu1jm"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_nogf6"]
+[ext_resource type="PackedScene" uid="uid://dvrnibtwbaso1" path="res://bg.tscn" id="2_jviik"]
+[ext_resource type="PackedScene" uid="uid://c0q03k35my7nl" path="res://duck.tscn" id="3_3pegg"]
+[ext_resource type="Texture2D" uid="uid://bvbbu87p3ocsm" path="res://assets/person1.png" id="3_fndpd"]
+[ext_resource type="PackedScene" uid="uid://dxjhnfrsyr4dg" path="res://bullet.tscn" id="5_d8o2l"]
+[ext_resource type="Script" path="res://player.gd" id="5_ryrmg"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ub3yl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_fndpd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2ohnn"]
+radius = 17.0
+height = 84.0
+
+[node name="Main" type="Node" node_paths=PackedStringArray("game_over", "counter")]
+script = ExtResource("1_nogf6")
+bg_scene = ExtResource("2_jviik")
+duck_scene = ExtResource("3_3pegg")
+game_over = NodePath("Game Over")
+counter = NodePath("Score")
+
+[node name="Game Over" type="Control" parent="."]
+z_index = 500
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Game Over"]
+layout_mode = 0
+offset_left = 520.0
+offset_top = 449.0
+offset_right = 782.0
+offset_bottom = 513.0
+theme_override_font_sizes/font_size = 46
+text = "Game Over!"
+
+[node name="Button" type="Button" parent="Game Over"]
+layout_mode = 0
+offset_left = 584.0
+offset_top = 519.0
+offset_right = 722.0
+offset_bottom = 584.0
+theme_override_font_sizes/font_size = 41
+text = "Again?"
+
+[node name="Player" type="AnimatedSprite2D" parent="."]
+z_index = 1
+position = Vector2(642, 336)
+sprite_frames = SubResource("SpriteFrames_ub3yl")
+script = ExtResource("5_ryrmg")
+bullet_scene = ExtResource("5_d8o2l")
+spread = 0.1
+num_bullets = 3
+bullet_delay = 0.04
+
+[node name="Area2D" type="Area2D" parent="Player"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
+shape = SubResource("CapsuleShape2D_2ohnn")
+
+[node name="Score" type="Label" parent="."]
+z_index = 1
+offset_right = 1275.0
+offset_bottom = 122.0
+theme_override_font_sizes/font_size = 61
+text = "999999"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Game Over/Button" to="." method="start"]
