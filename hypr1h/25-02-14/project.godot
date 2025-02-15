@@ -10,23 +10,25 @@ config_version=5
 
 [application]
 
-config/name="vexshapegame"
+config/name="Quatchmaker"
+config/version="1.0.0"
 run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-config/icon="res://icon.png"
+boot_splash/bg_color=Color(0, 0.333333, 0.117647, 1)
+config/icon="res://assets/dressed_duck.png"
 
 [display]
 
-window/size/viewport_width=600
-window/size/viewport_height=450
+window/size/viewport_width=1280
+window/size/viewport_height=720
 window/stretch/mode="canvas_items"
 
 [dotnet]
 
-project/assembly_name="vexshapegame"
+project/assembly_name="25-02-14"
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-textures/vram_compression/import_etc2_astc=true
