@@ -9,6 +9,7 @@ var ducks_spawned: int = 0
 var ducks_left: int = 999999
 var playing: bool = true
 @export var counter: Label
+var best: int = ducks_left
 
 func _ready():
     var possible_bgs = ["grass", "grass", "grass", "grass2", "grass2", "grass2", "grass", "grass2", "sign", "bush"]
@@ -18,6 +19,9 @@ func _ready():
         bg.animation = possible_bgs[randi_range(0, 9)]
         add_child(bg)
     game_over.hide()
+    if FileAccess.file_exists("user://score.txt"):
+        best = int(FileAccess.get_file_as_string("user://score.txt"))
+    $Best.text = "Best: " + str(best)
 
 func _process(delta: float) -> void:
     duck_timer -= delta
@@ -35,6 +39,10 @@ func lose() -> void:
     if playing:
         playing = false
         game_over.show()
+        if ducks_left < best:
+            var file := FileAccess.open("user://score.txt", FileAccess.WRITE)
+            file.store_string(str(ducks_left))
+            file.close()
 
 func start() -> void:
     get_tree().reload_current_scene()

@@ -1,0 +1,195 @@
+[gd_scene load_steps=12 format=3 uid="uid://mcf4pp3hu1jm"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_nogf6"]
+[ext_resource type="Texture2D" uid="uid://6cw87v1c2cbh" path="res://assets/Duck2.png" id="2_8up62"]
+[ext_resource type="Texture2D" uid="uid://bqwlk0v7r08y8" path="res://assets/thought2.png" id="3_c3p35"]
+[ext_resource type="Texture2D" uid="uid://c6jjhqpv7nx1t" path="res://assets/thought.png" id="4_oo0st"]
+[ext_resource type="Texture2D" uid="uid://b1ighy1pyde6h" path="res://assets/heart.png" id="5_eoio8"]
+[ext_resource type="PackedScene" uid="uid://dj0ypaxl4xruv" path="res://duck.tscn" id="6_ho5k4"]
+[ext_resource type="Texture2D" uid="uid://deijwcn76u3ld" path="res://assets/eye.png" id="6_yvxe8"]
+[ext_resource type="Texture2D" uid="uid://cxjabe5fwia2l" path="res://assets/bow.png" id="7_84rgu"]
+[ext_resource type="Texture2D" uid="uid://b2gjhbmfkwb01" path="res://assets/hat.png" id="8_ebaeh"]
+[ext_resource type="Texture2D" uid="uid://c45yn6m8qndj4" path="res://assets/suit.png" id="9_hugqv"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4ie3f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_c3p35")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_oo0st")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="Main" type="Node" node_paths=PackedStringArray("left_boundary", "right_boundary", "ducks", "duck_example")]
+script = ExtResource("1_nogf6")
+left_boundary = NodePath("TL")
+right_boundary = NodePath("BR")
+duck_scene = ExtResource("6_ho5k4")
+ducks = NodePath("Ducks")
+duck_example = NodePath("Control/AnimatedSprite2D/Duck")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.522493, 0.413961, 1)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 414.0
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.481274, 7.09929e-07, 2.40654e-07, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.235662, 6.76839e-08, 5.41471e-08, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="Control"]
+clip_children = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 55.0
+offset_top = 340.0
+offset_right = -208.0
+offset_bottom = -232.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.727771, 0.683715, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/ColorRect3"]
+position = Vector2(61, 98)
+scale = Vector2(1.88, 1.88)
+texture = ExtResource("2_8up62")
+flip_h = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Control"]
+position = Vector2(234, 283)
+scale = Vector2(0.715, 0.715)
+sprite_frames = SubResource("SpriteFrames_4ie3f")
+autoplay = "default"
+frame_progress = 0.860398
+
+[node name="Duck" type="Sprite2D" parent="Control/AnimatedSprite2D"]
+visible = false
+position = Vector2(43.3566, 29.3706)
+scale = Vector2(-1.325, 1.325)
+texture = ExtResource("2_8up62")
+
+[node name="1" type="Sprite2D" parent="Control/AnimatedSprite2D/Duck"]
+texture = ExtResource("6_yvxe8")
+
+[node name="2" type="Sprite2D" parent="Control/AnimatedSprite2D/Duck"]
+texture = ExtResource("7_84rgu")
+
+[node name="3" type="Sprite2D" parent="Control/AnimatedSprite2D/Duck"]
+texture = ExtResource("8_ebaeh")
+
+[node name="4" type="Sprite2D" parent="Control/AnimatedSprite2D/Duck"]
+texture = ExtResource("9_hugqv")
+
+[node name="Timer" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 22.0
+offset_right = 399.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 56
+text = "0.0s"
+horizontal_alignment = 1
+
+[node name="Score" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 178.0
+offset_top = 494.0
+offset_right = 393.0
+offset_bottom = 715.0
+theme_override_font_sizes/font_size = 161
+text = "0"
+
+[node name="TextureRect" type="TextureRect" parent="Control/Score"]
+layout_mode = 0
+offset_left = -199.0
+offset_top = -12.0
+offset_right = 57.0
+offset_bottom = 244.0
+texture = ExtResource("5_eoio8")
+
+[node name="Best" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 672.0
+offset_right = 359.0
+offset_bottom = 893.0
+theme_override_font_sizes/font_size = 26
+text = "Best: ??"
+
+[node name="TL" type="Node2D" parent="."]
+position = Vector2(414, 0)
+
+[node name="BR" type="Node2D" parent="."]
+position = Vector2(1280, 720)
+
+[node name="Ducks" type="Node" parent="."]
+
+[node name="Start" type="Button" parent="."]
+offset_left = 751.0
+offset_top = 290.0
+offset_right = 914.0
+offset_bottom = 389.0
+theme_override_font_sizes/font_size = 66
+text = "Start"
+
+[node name="GameOver" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="GameOver"]
+layout_mode = 0
+offset_left = 762.0
+offset_top = 349.0
+offset_right = 916.0
+offset_bottom = 421.0
+theme_override_font_sizes/font_size = 46
+text = "Again?"
+
+[node name="Label" type="Label" parent="GameOver"]
+layout_mode = 0
+offset_left = 663.0
+offset_top = 269.0
+offset_right = 1011.0
+offset_bottom = 353.0
+theme_override_font_sizes/font_size = 61
+text = "Game Over!"
+
+[connection signal="pressed" from="Start" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="GameOver/Button" to="." method="_on_button_pressed"]
