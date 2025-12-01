@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://ceblrrccbh53y"]
+
+[ext_resource type="Script" uid="uid://cadbnogo2agfw" path="res://duck.gd" id="1_mbejg"]
+[ext_resource type="Texture2D" uid="uid://cmp46juf6lydl" path="res://assets/Duck1.png" id="2_qigen"]
+[ext_resource type="Texture2D" uid="uid://cldlxn1jl1w2i" path="res://assets/Duck2.png" id="3_co3ja"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bwfjh"]
+radius = 32.0
+height = 64.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gey4j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_qigen")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_co3ja")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Duck" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
+collision_layer = 6
+collision_mask = 5
+script = ExtResource("1_mbejg")
+sprite = NodePath("AnimatedSprite2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_bwfjh")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_gey4j")
+flip_h = true

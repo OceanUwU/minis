@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bf1i1v2h7u42v"]
+
+[ext_resource type="Script" uid="uid://dx66kh5q4j7nx" path="res://surface.gd" id="1_tap8s"]
+
+[node name="Surface" type="StaticBody2D"]
+script = ExtResource("1_tap8s")
+colour = Color(1, 0.371825, 0.261217, 1)

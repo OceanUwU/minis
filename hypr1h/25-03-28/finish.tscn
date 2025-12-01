@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbo7s4msaa3ei"]
+
+[ext_resource type="Script" uid="uid://gqs7vi35no5a" path="res://finish.gd" id="1_bt3yw"]
+[ext_resource type="Texture2D" uid="uid://ted8sxarpm0v" path="res://assets/Ending.png" id="1_yp4eo"]
+
+[node name="Finish" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bt3yw")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_yp4eo")
+
+[node name="Again" type="Button" parent="."]
+layout_mode = 0
+offset_left = 42.0
+offset_top = 503.0
+offset_right = 377.0
+offset_bottom = 595.0
+theme_override_font_sizes/font_size = 61
+text = "Play again?"
+
+[connection signal="pressed" from="Again" to="." method="_on_again_pressed"]

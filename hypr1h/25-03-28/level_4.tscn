@@ -1,0 +1,110 @@
+[gd_scene load_steps=9 format=3 uid="uid://cid4f3xqw5lqg"]
+
+[ext_resource type="PackedScene" uid="uid://cx6g028doqibj" path="res://levelbase.tscn" id="1_5pu08"]
+[ext_resource type="Texture2D" uid="uid://dpaql624n4kxc" path="res://assets/person1.png" id="2_na6m6"]
+[ext_resource type="PackedScene" uid="uid://duo1o6ya257vg" path="res://ending_scene.tscn" id="2_xcfcc"]
+[ext_resource type="PackedScene" uid="uid://bf1i1v2h7u42v" path="res://surface.tscn" id="4_l45re"]
+[ext_resource type="PackedScene" uid="uid://b4c6vmm0qkwo6" path="res://spikes.tscn" id="5_c8stx"]
+[ext_resource type="Texture2D" uid="uid://dxm3t8q3odmqu" path="res://assets/NDASign.png" id="6_c8stx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aqy51"]
+size = Vector2(173, 23)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s24i2"]
+size = Vector2(106, 302)
+
+[node name="Level4" instance=ExtResource("1_5pu08")]
+num_others = 240
+next_level = ExtResource("2_xcfcc")
+
+[node name="Goal" parent="." index="6"]
+position = Vector2(924, 72)
+
+[node name="Sprite2D" parent="Goal" index="1"]
+texture = ExtResource("2_na6m6")
+
+[node name="Surface5" parent="." index="7" instance=ExtResource("4_l45re")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Surface5" index="0"]
+position = Vector2(436.5, 551.5)
+shape = SubResource("RectangleShape2D_aqy51")
+
+[node name="Spikes" parent="Surface5" index="1" instance=ExtResource("5_c8stx")]
+position = Vector2(437, 475)
+
+[node name="Surface6" parent="." index="8" instance=ExtResource("4_l45re")]
+position = Vector2(244, -158)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Surface6" index="0"]
+position = Vector2(436.5, 551.5)
+shape = SubResource("RectangleShape2D_aqy51")
+
+[node name="Spikes" parent="Surface6" index="1" instance=ExtResource("5_c8stx")]
+position = Vector2(437, 475)
+
+[node name="Surface7" parent="." index="9" instance=ExtResource("4_l45re")]
+position = Vector2(510, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Surface7" index="0"]
+position = Vector2(436.5, 551.5)
+shape = SubResource("RectangleShape2D_aqy51")
+
+[node name="Spikes" parent="Surface7" index="1" instance=ExtResource("5_c8stx")]
+position = Vector2(437, 475)
+
+[node name="Surface8" parent="." index="10" instance=ExtResource("4_l45re")]
+position = Vector2(744, -119)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Surface8" index="0"]
+position = Vector2(436.5, 551.5)
+shape = SubResource("RectangleShape2D_aqy51")
+
+[node name="Spikes" parent="Surface8" index="1" instance=ExtResource("5_c8stx")]
+position = Vector2(437, 475)
+
+[node name="Surface12" parent="." index="11" instance=ExtResource("4_l45re")]
+position = Vector2(530, -259)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Surface12" index="0"]
+position = Vector2(436.5, 551.5)
+shape = SubResource("RectangleShape2D_aqy51")
+
+[node name="Spikes" parent="Surface12" index="1" instance=ExtResource("5_c8stx")]
+position = Vector2(410, 476)
+
+[node name="Surface11" parent="." index="12" instance=ExtResource("4_l45re")]
+position = Vector2(485, -418)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Surface11" index="0"]
+position = Vector2(436.5, 551.5)
+shape = SubResource("RectangleShape2D_aqy51")
+
+[node name="Surface9" parent="." index="13" instance=ExtResource("4_l45re")]
+position = Vector2(-4, -335)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Surface9" index="0"]
+position = Vector2(436.5, 551.5)
+shape = SubResource("RectangleShape2D_aqy51")
+
+[node name="Surface10" parent="." index="14" instance=ExtResource("4_l45re")]
+position = Vector2(-248, -167)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Surface10" index="0"]
+position = Vector2(436.5, 551.5)
+shape = SubResource("RectangleShape2D_aqy51")
+
+[node name="Spikes" parent="Surface10" index="1" instance=ExtResource("5_c8stx")]
+position = Vector2(437, 475)
+
+[node name="Surface13" parent="." index="15" instance=ExtResource("4_l45re")]
+position = Vector2(-248, -167)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Surface13" index="0"]
+position = Vector2(933, 723)
+shape = SubResource("RectangleShape2D_s24i2")
+
+[node name="NdaSign" type="Sprite2D" parent="." index="16"]
+position = Vector2(429, 160)
+texture = ExtResource("6_c8stx")
+
+[editable path="Goal"]

@@ -1,0 +1,79 @@
+[gd_scene load_steps=11 format=3 uid="uid://cx6g028doqibj"]
+
+[ext_resource type="PackedScene" uid="uid://bf1i1v2h7u42v" path="res://surface.tscn" id="1_ckvyq"]
+[ext_resource type="Script" uid="uid://bddp58modskt6" path="res://level.gd" id="1_mm4je"]
+[ext_resource type="PackedScene" uid="uid://s42l4loh2u3o" path="res://character.tscn" id="2_tvpc8"]
+[ext_resource type="PackedScene" uid="uid://ceblrrccbh53y" path="res://duck.tscn" id="4_vop7y"]
+[ext_resource type="Texture2D" uid="uid://cqpmpd2ge3e7r" path="res://assets/DEADTHSCREEN.png" id="5_7cshf"]
+[ext_resource type="PackedScene" uid="uid://cwk061dw2dnfo" path="res://goal.tscn" id="6_cqmoe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mm4je"]
+size = Vector2(20, 741)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tvpc8"]
+size = Vector2(1299, 23)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vop7y"]
+size = Vector2(20, 741)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7cshf"]
+size = Vector2(1302, 19)
+
+[node name="BaseLevel" type="Node"]
+script = ExtResource("1_mm4je")
+num_others = 80
+other = ExtResource("2_tvpc8")
+
+[node name="Surface" parent="." instance=ExtResource("1_ckvyq")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Surface"]
+position = Vector2(0, 360.5)
+shape = SubResource("RectangleShape2D_mm4je")
+
+[node name="Surface2" parent="." instance=ExtResource("1_ckvyq")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Surface2"]
+position = Vector2(639.5, 719.5)
+shape = SubResource("RectangleShape2D_tvpc8")
+
+[node name="Surface3" parent="." instance=ExtResource("1_ckvyq")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Surface3"]
+position = Vector2(1279, 361)
+shape = SubResource("RectangleShape2D_vop7y")
+
+[node name="Surface4" parent="." instance=ExtResource("1_ckvyq")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Surface4"]
+position = Vector2(641, -0.5)
+shape = SubResource("RectangleShape2D_7cshf")
+
+[node name="Duck" parent="." instance=ExtResource("4_vop7y")]
+position = Vector2(107, 624)
+
+[node name="Deadthscreen" type="TextureRect" parent="."]
+visible = false
+z_index = 2000
+offset_left = -15.9999
+offset_top = -7.99997
+offset_right = 1904.0
+offset_bottom = 1072.0
+scale = Vector2(0.68, 0.68)
+texture = ExtResource("5_7cshf")
+
+[node name="Retry" type="Button" parent="Deadthscreen"]
+layout_mode = 0
+offset_left = 857.353
+offset_top = 911.765
+offset_right = 1048.35
+offset_bottom = 1016.76
+theme_override_font_sizes/font_size = 71
+text = "Retry
+"
+
+[node name="Goal" parent="." instance=ExtResource("6_cqmoe")]
+position = Vector2(1136, 644)
+
+[connection signal="die" from="Duck" to="." method="_on_duck_die"]
+[connection signal="win" from="Duck" to="." method="_on_duck_win"]
+[connection signal="pressed" from="Deadthscreen/Retry" to="." method="_on_retry_pressed"]

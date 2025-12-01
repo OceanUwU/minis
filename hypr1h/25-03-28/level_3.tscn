@@ -1,0 +1,115 @@
+[gd_scene load_steps=8 format=3 uid="uid://gxtx1chg27ul"]
+
+[ext_resource type="PackedScene" uid="uid://cx6g028doqibj" path="res://levelbase.tscn" id="1_ayd5w"]
+[ext_resource type="PackedScene" uid="uid://cid4f3xqw5lqg" path="res://level_4.tscn" id="2_1fhj5"]
+[ext_resource type="PackedScene" uid="uid://bf1i1v2h7u42v" path="res://surface.tscn" id="3_16pka"]
+[ext_resource type="PackedScene" uid="uid://b4c6vmm0qkwo6" path="res://spikes.tscn" id="4_j8bo8"]
+[ext_resource type="Texture2D" uid="uid://dxm3t8q3odmqu" path="res://assets/NDASign.png" id="5_1jdk1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j8bo8"]
+size = Vector2(215, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1jdk1"]
+size = Vector2(23, 20)
+
+[node name="Level3" instance=ExtResource("1_ayd5w")]
+num_others = 180
+next_level = ExtResource("2_1fhj5")
+
+[node name="Duck" parent="." index="4"]
+position = Vector2(69, 101)
+
+[node name="Goal" parent="." index="6"]
+position = Vector2(1189, 91)
+
+[node name="Surface5" parent="." index="7" instance=ExtResource("3_16pka")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Surface5" index="0"]
+position = Vector2(97.5, 162.5)
+shape = SubResource("RectangleShape2D_j8bo8")
+
+[node name="Surface6" parent="." index="8" instance=ExtResource("3_16pka")]
+position = Vector2(1014, 3)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Surface6" index="0"]
+position = Vector2(146, 162.5)
+shape = SubResource("RectangleShape2D_j8bo8")
+
+[node name="Surface7" parent="." index="9" instance=ExtResource("3_16pka")]
+position = Vector2(1045, -53)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Surface7" index="0"]
+position = Vector2(-771.5, 593)
+shape = SubResource("RectangleShape2D_1jdk1")
+
+[node name="Surface8" parent="." index="10" instance=ExtResource("3_16pka")]
+position = Vector2(1215, -155)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Surface8" index="0"]
+position = Vector2(-771.5, 593)
+shape = SubResource("RectangleShape2D_1jdk1")
+
+[node name="Surface9" parent="." index="11" instance=ExtResource("3_16pka")]
+position = Vector2(1343, 9)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Surface9" index="0"]
+position = Vector2(-771.5, 593)
+shape = SubResource("RectangleShape2D_1jdk1")
+
+[node name="Surface10" parent="." index="12" instance=ExtResource("3_16pka")]
+position = Vector2(1459, -69)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Surface10" index="0"]
+position = Vector2(-771.5, 593)
+shape = SubResource("RectangleShape2D_1jdk1")
+
+[node name="Surface11" parent="." index="13" instance=ExtResource("3_16pka")]
+position = Vector2(1566, -159)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Surface11" index="0"]
+position = Vector2(-771.5, 593)
+shape = SubResource("RectangleShape2D_1jdk1")
+
+[node name="Surface12" parent="." index="14" instance=ExtResource("3_16pka")]
+position = Vector2(1716, -292)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Surface12" index="0"]
+position = Vector2(-771.5, 593)
+shape = SubResource("RectangleShape2D_1jdk1")
+
+[node name="Spikes" parent="." index="15" instance=ExtResource("4_j8bo8")]
+position = Vector2(65, 648)
+
+[node name="Spikes2" parent="." index="16" instance=ExtResource("4_j8bo8")]
+position = Vector2(183, 647)
+
+[node name="Spikes3" parent="." index="17" instance=ExtResource("4_j8bo8")]
+position = Vector2(303, 648)
+
+[node name="Spikes4" parent="." index="18" instance=ExtResource("4_j8bo8")]
+position = Vector2(421, 647)
+
+[node name="Spikes5" parent="." index="19" instance=ExtResource("4_j8bo8")]
+position = Vector2(541, 646)
+
+[node name="Spikes6" parent="." index="20" instance=ExtResource("4_j8bo8")]
+position = Vector2(661, 645)
+
+[node name="Spikes7" parent="." index="21" instance=ExtResource("4_j8bo8")]
+position = Vector2(781, 644)
+
+[node name="Spikes8" parent="." index="22" instance=ExtResource("4_j8bo8")]
+position = Vector2(901, 643)
+
+[node name="Spikes9" parent="." index="23" instance=ExtResource("4_j8bo8")]
+position = Vector2(1020, 642)
+
+[node name="Spikes10" parent="." index="24" instance=ExtResource("4_j8bo8")]
+position = Vector2(1138, 642)
+
+[node name="Spikes11" parent="." index="25" instance=ExtResource("4_j8bo8")]
+position = Vector2(1211, 642)
+
+[node name="NdaSign" type="Sprite2D" parent="." index="26"]
+position = Vector2(181, 106)
+texture = ExtResource("5_1jdk1")

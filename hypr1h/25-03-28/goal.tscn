@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwk061dw2dnfo"]
+
+[ext_resource type="Script" uid="uid://nhfi3ghn2ijv" path="res://goal.gd" id="1_6k3qi"]
+[ext_resource type="Texture2D" uid="uid://beb3bn40nfna1" path="res://assets/FLAG.png" id="2_0qle8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7sh37"]
+radius = 37.0
+height = 128.0
+
+[node name="Goal" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 5
+script = ExtResource("1_6k3qi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_7sh37")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_0qle8")

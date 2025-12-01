@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3 uid="uid://s42l4loh2u3o"]
+
+[ext_resource type="Script" uid="uid://b5pjod12v3vc4" path="res://character.gd" id="1_glpr6"]
+[ext_resource type="Texture2D" uid="uid://dtniqxqq45oq8" path="res://assets/dog1.png" id="2_yxww1"]
+[ext_resource type="Texture2D" uid="uid://cywxjwdkj8s6i" path="res://assets/dog2.png" id="3_wdpcj"]
+[ext_resource type="Texture2D" uid="uid://dtwwg3lg3173w" path="res://assets/Rat1.png" id="4_qi5as"]
+[ext_resource type="Texture2D" uid="uid://co5u760eu1v8o" path="res://assets/Rat2.png" id="5_jb3kq"]
+[ext_resource type="Texture2D" uid="uid://dy3ub330l1pok" path="res://assets/Snail1.png" id="6_c1b4b"]
+[ext_resource type="Texture2D" uid="uid://du2yls17o0wf4" path="res://assets/Snail2.png" id="7_7tnxx"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bwfjh"]
+radius = 32.0
+height = 64.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x1sy7"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_yxww1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_wdpcj")
+}],
+"loop": true,
+"name": &"dog",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_qi5as")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_jb3kq")
+}],
+"loop": true,
+"name": &"rat",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_c1b4b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_7tnxx")
+}],
+"loop": true,
+"name": &"snail",
+"speed": 5.0
+}]
+
+[node name="Character" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
+collision_layer = 2
+script = ExtResource("1_glpr6")
+sprite = NodePath("AnimatedSprite2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_bwfjh")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_x1sy7")
+animation = &"dog"

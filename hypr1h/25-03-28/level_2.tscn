@@ -1,0 +1,35 @@
+[gd_scene load_steps=8 format=3 uid="uid://dsjnu6kb3jms6"]
+
+[ext_resource type="PackedScene" uid="uid://cx6g028doqibj" path="res://levelbase.tscn" id="1_jg0dc"]
+[ext_resource type="PackedScene" uid="uid://gxtx1chg27ul" path="res://level_3.tscn" id="2_nmjpi"]
+[ext_resource type="PackedScene" uid="uid://bf1i1v2h7u42v" path="res://surface.tscn" id="3_1y8me"]
+[ext_resource type="PackedScene" uid="uid://b4c6vmm0qkwo6" path="res://spikes.tscn" id="4_7j8ne"]
+[ext_resource type="Texture2D" uid="uid://7of2b7fo7wnl" path="res://assets/Bush.png" id="5_7dov7"]
+[ext_resource type="Texture2D" uid="uid://dxm3t8q3odmqu" path="res://assets/NDASign.png" id="6_0s5r2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hn12h"]
+size = Vector2(503, 176)
+
+[node name="Level1" instance=ExtResource("1_jg0dc")]
+num_others = 60
+next_level = ExtResource("2_nmjpi")
+
+[node name="Surface5" parent="." index="4" instance=ExtResource("3_1y8me")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Surface5" index="0"]
+position = Vector2(601.5, 628)
+shape = SubResource("RectangleShape2D_hn12h")
+
+[node name="Spikes" parent="." index="6" instance=ExtResource("4_7j8ne")]
+position = Vector2(489, 475)
+
+[node name="Spikes2" parent="." index="7" instance=ExtResource("4_7j8ne")]
+position = Vector2(724, 475)
+
+[node name="Bush" type="Sprite2D" parent="." index="10"]
+position = Vector2(261, 677)
+texture = ExtResource("5_7dov7")
+
+[node name="Sign" type="Sprite2D" parent="." index="11"]
+position = Vector2(966, 667)
+texture = ExtResource("6_0s5r2")
