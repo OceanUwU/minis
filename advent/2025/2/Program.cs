@@ -1,4 +1,5 @@
-﻿using Range = (long Min, long Max);
+﻿using System.Text;
+using Range = (long Min, long Max);
 
 class Program {
     static void Main(string[] args) {
@@ -25,11 +26,20 @@ class Program {
         for (long i = range.Min; i <= range.Max; i++) {
             string str = i.ToString();
             int len = str.Length;
-            if (len % 2 == 1) continue;
-            if (str[..(len/2)] == str[(len/2)..]) {
-                invalids.Add(i);
-                Console.WriteLine(i);
-            }
+            if (len < 2) continue;
+            List<int> factors = [1];
+            int max = (int)Math.Sqrt(len);
+            for (int j = 2; j <= max; j++)
+                if (len % j == 0) {
+                    factors.Add(j);
+                    if (j != len / j)
+                        factors.Add(len / j);
+                }
+            foreach (int factor in factors)
+                if (str == new StringBuilder(len).Insert(0, str[..factor], len/factor).ToString()) {
+                    invalids.Add(i);
+                    break;
+                }
         }
         return invalids;
     }
