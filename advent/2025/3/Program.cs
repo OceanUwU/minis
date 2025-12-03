@@ -3,18 +3,17 @@
         StreamReader reader = new(args[0]);
         string text = reader.ReadToEnd();
         Bank[] banks = [..text.Split('\n').Where(static s => s != "").Select(static s => new Bank(s))];
-        Console.WriteLine(TotalJoltage(banks));
+        Console.WriteLine(TotalJoltage(banks, 12));
     }
 
-    private static int TotalJoltage(Bank[] banks) => banks.Sum(static b => b.MaxJoltage());
+    private static long TotalJoltage(Bank[] banks, int numBatteries) => banks.Sum(b => b.MaxJoltage(numBatteries));
 }
 
 public class Bank(string batteries) {
-    private const int NUM_BATTERIES_ON = 2;
     private readonly string batteries = batteries;
 
-    public int MaxJoltage() {
-        int[] best = new int[NUM_BATTERIES_ON];
+    public long MaxJoltage(int numBatteries) {
+        int[] best = new int[numBatteries];
         for (int i = 0; i < best.Length; i++)
             best[i] = -1;
         for (int i = 0; i < batteries.Length; i++) {
@@ -26,6 +25,6 @@ public class Bank(string batteries) {
                 best[j] = -1;
             }
         }
-        return int.Parse(new string([..best.Order().Select(index => batteries[index])]));
+        return long.Parse(new string([..best.Order().Select(index => batteries[index])]));
     }
 }
