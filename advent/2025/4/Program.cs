@@ -18,7 +18,9 @@
             .Split('\n')
             .Where(static line => line != "")
             .Select(static line => line.Select(static c => c == '@').ToArray())];
-        Console.WriteLine(CountAccessible(rolls));
+        int rollsBefore = CountRolls(rolls);
+        RemoveAllAccessible(rolls);
+        Console.WriteLine(rollsBefore - CountRolls(rolls));
     }
 
     private static int CountAccessible(bool[][] rolls) {
@@ -30,6 +32,29 @@
         return accessible;
     }
 
+    private static int CountRolls(bool[][] rolls) {
+        int numRolls = 0;
+        for (int x = 0; x < rolls.Length; x++)
+            for (int y = 0; y < rolls[0].Length; y++)
+                if (rolls[x][y])
+                    numRolls++;
+        return numRolls;
+    }
+
+    private static bool RemoveAccessible(bool[][] rolls) {
+        bool removedAny = false;
+        for (int x = 0; x < rolls.Length; x++)
+            for (int y = 0; y < rolls[0].Length; y++)
+                if (IsAccessible(rolls, x, y)) {
+                    rolls[x][y] = false;
+                    removedAny = true;
+                }
+        return removedAny;
+    }
+
+    private static void RemoveAllAccessible(bool[][] rolls) {
+        while (RemoveAccessible(rolls)) {}
+    }
 
     private static bool IsAccessible(bool[][] rolls, int x, int y) {
         if (!rolls[x][y])
