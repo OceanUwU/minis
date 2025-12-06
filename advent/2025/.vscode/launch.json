@@ -9,8 +9,8 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/5/bin/Debug/net9.0/5",
-            "args": ["5/input.txt"],
+            "program": "${workspaceFolder}/6/bin/Debug/net9.0/6",
+            "args": ["6/input.txt"],
             "cwd": "${workspaceFolder}",
             "console": "internalConsole",
             "stopAtEntry": false
