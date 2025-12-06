@@ -5,19 +5,30 @@
         string[] lines = [..text.Split('\n').Where(static l => l != "")];
         string operators = lines.Last();
         lines = [..lines.SkipLast(1)];
-        List<Problem> problems = [];
+        List<Problem> horizontalProblems = [], verticalProblems = [];
         int problemStart = 0;
-        void AddProblem(int end) => problems.Add(new(
+        void AddHorizontalProblem(int end) => horizontalProblems.Add(new(
             operators[problemStart],
             [..lines.Select(l => long.Parse(l[problemStart..end].Trim()))]
         ));
+        void AddVerticalProblem(int end) => verticalProblems.Add(new(
+            operators[problemStart],
+            [..Enumerable.Range(problemStart, end - problemStart)
+                .Reverse()
+                .Select(i => new string([..lines.Select(l => l[i])]).Trim())
+                .Where(n => !string.IsNullOrWhiteSpace(n))
+                .Select(long.Parse)]
+        ));
         for (int i = 1; i < operators.Length; i++) {
             if (operators[i] == ' ') continue;
-            AddProblem(i - 1);
+            AddHorizontalProblem(i - 1);
+            AddVerticalProblem(i - 1);
             problemStart = i;
         }
-        AddProblem(operators.Length);
-        Console.WriteLine(problems.Sum(static p => p.Result()));
+        AddHorizontalProblem(operators.Length);
+        AddVerticalProblem(operators.Length);
+        Console.WriteLine(horizontalProblems.Sum(static p => p.Result()));
+        Console.WriteLine(verticalProblems.Sum(static p => p.Result()));
     }
 }
 
