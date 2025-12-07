@@ -10,6 +10,9 @@
         string text = reader.ReadToEnd();
         char[][] lines = [..text.Split('\n').Where(static l => l != "").Select(static l => l.ToCharArray())];
         int[] beams = [Array.IndexOf(lines[0], Start)];
+        long[] realities = new long[lines[0].Length];
+        foreach (int b in beams)
+            realities[b] = 1;
         int splits = 0;
         for (int i = 1; i < lines.Length; i++) {
             char[] line = lines[i];
@@ -24,6 +27,9 @@
                         splits++;
                         line[b-1] = Beam;
                         line[b+1] = Beam;
+                        realities[b-1] += realities[b];
+                        realities[b+1] += realities[b];
+                        realities[b] = 0;
                         break;
                 }
             }
@@ -31,5 +37,6 @@
         }
         Console.WriteLine(string.Join('\n', lines.Select(static l => new string(l))));
         Console.WriteLine(splits);
+        Console.WriteLine(realities.Sum());
     }
 }
