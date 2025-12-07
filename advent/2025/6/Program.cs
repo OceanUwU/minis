@@ -16,7 +16,7 @@
             [..Enumerable.Range(problemStart, end - problemStart)
                 .Reverse()
                 .Select(i => new string([..lines.Select(l => l[i])]).Trim())
-                .Where(n => !string.IsNullOrWhiteSpace(n))
+                .Where(static n => !string.IsNullOrWhiteSpace(n))
                 .Select(long.Parse)]
         ));
         for (int i = 1; i < operators.Length; i++) {
