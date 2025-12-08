@@ -11,16 +11,26 @@ public class Program {
         List<Connection> connections = [];
         for (int i = 0; i < points.Length - 1; i++)
             connections.AddRange(points[i].Connections(points[(i+1)..]));
-        connections = [..connections.OrderBy(static c => c.distance).Take(NumPairs)];
+        connections = [..connections.OrderBy(static c => c.distance)];
+        Console.WriteLine(Connect(points, [..connections.Take(NumPairs)]).circuits.Select(static c => c.Count).OrderDescending().Take(NumCircuits).Aggregate(1, (a, b) => a * b));
+        var final = Connect(points, connections).final;
+        Console.WriteLine((long)final.a.X * final.b.X);
+    }
+
+    private static (List<List<Point>> circuits, Connection final) Connect(Point[] points, List<Connection> connections) {
         List<List<Point>> circuits = [..points.Select(static p => new List<Point>([p]))];
+        Connection final = connections[0];
         foreach (Connection connection in connections) {
             var circuitA = circuits.First(c => c.Any(p => p == connection.a));
             var circuitB = circuits.First(c => c.Any(p => p == connection.b));
             if (circuitA == circuitB) continue;
+            final = connection;
             circuits.Remove(circuitB);
             circuitA.AddRange(circuitB);
+            if (circuits.Count == 1)
+                break;
         }
-        Console.WriteLine(circuits.Select(static c => c.Count).OrderDescending().Take(NumCircuits).Aggregate(1, (a, b) => a * b));
+        return (circuits, final);
     }
 }
 
